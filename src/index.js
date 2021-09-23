@@ -2,11 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+
+import NavbarHotel from './components/include/navbar.js'
+import Footer from './components/include/footer';
+
+import '../node_modules/react-bootstrap';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <NavbarHotel />
   </React.StrictMode>,
   document.getElementById('root')
 );
