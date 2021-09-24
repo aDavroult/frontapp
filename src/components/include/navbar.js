@@ -14,6 +14,7 @@ import Home from '../pages/Home';
 import SignUp from "../pages/SignUp";
 import Contact from "../pages/Contact";
 import MyBookings from "../pages/MyBookings";
+import RoomList from "../pages/RoomList";
 
 class NavbarHotel extends Component {
     render() {
@@ -24,6 +25,7 @@ class NavbarHotel extends Component {
                 <Navbar.Brand href="#home">appHOTEL</Navbar.Brand>
                 <Nav className="me-auto">
                   <Nav.Link><Link to="/">Accueil</Link></Nav.Link>
+                  <Nav.Link><Link to="/rooms">Nos chambres</Link></Nav.Link>
                   <Nav.Link><Link to="/contact">Contact</Link></Nav.Link>
                   <Nav.Link><Link to="/mes-reservations">Mes réservations</Link></Nav.Link>
                 </Nav>
@@ -44,6 +46,9 @@ class NavbarHotel extends Component {
             <Switch>
               <Route exact path="/">
                 <Home/>
+              </Route>
+              <Route path="/rooms">
+                <RoomList/>
               </Route>
               <Route path="/contact">
                 <Contact/>
