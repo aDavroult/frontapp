@@ -16,23 +16,23 @@ const Login = () => {
                     <h1 className="mt-5 text-center blue">CONNEXION</h1>
                     <Col className="p-5 m-auto rounded-lg">
                         <Form>
-                            <Form.Group controlId="formBasicEmail">
+                            <Form.Group controlId="formBasicEmail" className="mb-3">
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control type="email" placeholder="Insérez votre adresse email" />
                             </Form.Group>
 
-                            <Form.Group controlId="formBasicPassword mt-5">
+                            <Form.Group controlId="formBasicPassword" className="mb-3">
                                 <Form.Label>Mot de passe</Form.Label>
                                 <Form.Control type="password" placeholder="Insérez votre mot de passe" />
                             </Form.Group>
 
                             <Row className="mt-5">
-                                <Col md={6} className="text-center">
+                                <Col md={6} className="text-center mb-3">
                                     <Button variant="dark btn-block" type="submit">
                                         <Link className="white" to="/">RETOUR</Link>
                                     </Button>
                                 </Col>
-                                <Col md={6} className="text-center">
+                                <Col md={6} className="text-center mb-3">
                                     <Button variant="dark btn-block" type="submit" className="white">
                                         CONNEXION
                                     </Button>
