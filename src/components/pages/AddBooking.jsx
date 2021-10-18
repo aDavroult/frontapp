@@ -4,10 +4,6 @@ import Footer from '../include/footer';
 
 import {Button, Col, Container, Form, Row, Carousel, Image} from "react-bootstrap";
 
-import {
-  Link
-} from "react-router-dom";
-
 const Login = () => {
     return (
         <>
