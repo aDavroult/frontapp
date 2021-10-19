@@ -4,12 +4,6 @@ import Footer from '../include/footer';
 
 import {Button, Col, Container, Form, Row, Carousel, Image} from "react-bootstrap";
 
-import {
-  Link
-} from "react-router-dom";
-
-import axios from 'axios';
-
 const Login = () => {
     const [dateStart, setDateStart] = useState('');
     const [endDate, setEndDate] = useState('');
@@ -63,8 +57,8 @@ const Login = () => {
                                 <Form.Group as={Col} controlId="formGridPassword">
                                     <Form.Label>Type de chambre</Form.Label>
                                     <Form.Select aria-label="Type de chambre">
-                                        <option value="1">Chambre Simple</option>
-                                        <option value="2">Chambre double</option>
+                                        <option value="1">Simple</option>
+                                        <option value="2">Double</option>
                                     </Form.Select>
                                 </Form.Group>
                             </Row>
@@ -173,7 +167,10 @@ const Login = () => {
                     </Col>
                 </Row>
             </Container>
+<<<<<<< HEAD
             {/* <Footer/> */}
+=======
+>>>>>>> 52ced608468356e828345f545fe2e301e60d3807
         </>
     );
 };
