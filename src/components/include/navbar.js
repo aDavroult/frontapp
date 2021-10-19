@@ -43,13 +43,17 @@ class NavbarHotel extends Component {
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text>
-                       <Link to="/login">Connexion</Link>
+                      <Link to="/login">Connexion</Link>
                     </Navbar.Text>
                     <Navbar.Text>
                       &nbsp;|&nbsp;
                     </Navbar.Text>
                     <Navbar.Text>
                         <Link to="/signup">Inscription</Link>
+                    </Navbar.Text>
+                    &nbsp;|&nbsp;
+                    <Navbar.Text>
+                      <Link to="/" onClick ={()=>localStorage.clear()}>Déconnexion</Link>
                     </Navbar.Text>
                 </Navbar.Collapse>
               </Container>

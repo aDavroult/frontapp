@@ -8,10 +8,15 @@ import '../node_modules/react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://127.0.0.1:8000/';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+
+    <App/>   
+
   </React.StrictMode>,
   document.getElementById('root')
 );
