@@ -4,10 +4,6 @@ import Footer from '../include/footer';
 
 import {Button, Col, Container, Form, Row, Carousel, Image} from "react-bootstrap";
 
-import {
-  Link
-} from "react-router-dom";
-
 const Login = () => {
     return (
         <>
@@ -30,14 +26,14 @@ const Login = () => {
                             <Row className="mb-3">
                                 <Form.Group as={Col} controlId="formGridEmail">
                                     <Form.Label>Nombre de chambre</Form.Label>
-                                    <Form.Control type="number" placeholder="Insérez la date de début" />
+                                    <Form.Control type="number" placeholder="Insérez le nombre de chambre" />
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formGridPassword">
                                     <Form.Label>Type de chambre</Form.Label>
                                     <Form.Select aria-label="Type de chambre">
-                                        <option value="1">Chambre Simple</option>
-                                        <option value="2">Chambre double</option>
+                                        <option value="1">Simple</option>
+                                        <option value="2">Double</option>
                                     </Form.Select>
                                 </Form.Group>
                             </Row>
