@@ -138,7 +138,6 @@ const Login = () => {
                     </Col>
                 </Row>
             </Container>
-            <Footer/>
         </>
     );
 };

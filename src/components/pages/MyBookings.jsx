@@ -94,7 +94,6 @@ const myBookings = () => {
 
                 </Row>
             </Container>
-            <Footer/>
         </>
     );
 };
