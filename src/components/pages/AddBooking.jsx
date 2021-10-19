@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import Footer from '../include/footer';
 
@@ -8,29 +8,56 @@ import {
   Link
 } from "react-router-dom";
 
+import axios from 'axios';
+
 const Login = () => {
+    const [dateStart, setDateStart] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [price, setPrice] = useState(10);
+    const [rooms, setRooms] = useState('');
+    const [options, setOptions] = useState('');
+
+    const handleSubmit = e => {
+        // e.preventDefault();
+        console.log(e);
+
+        axios.post('https://apphot.herokuapp.com/api/bookings/')
+        .then((response) => {
+            setDateStart(dateStart);
+            setEndDate(endDate);
+            setPrice(price);
+            setRooms(rooms);
+            setOptions(options);
+        })
+    }
+
+    const addRoom = e => {
+        e.preventDefault();
+        console.log('new Room');
+    }
+
     return (
         <>
             <Container className="mb-5 mt-5">
                 <Row>
                     <Col className="col-md-6 form-box">
                         <h1 className="mt-5 mb-2 text-center blue">Réservez !</h1>
-                        <Form>
+                        <Form onSubmit={handleSubmit}>
                             <Row className="mb-3">
                                 <Form.Group as={Col} controlId="formGridEmail">
                                     <Form.Label>Date de début</Form.Label>
-                                    <Form.Control type="text" placeholder="Insérez la date de début" />
+                                    <Form.Control type="text" placeholder="Insérez la date de début" name="dateStart" value={dateStart} onChange={(e) => setDateStart(e.target.value)}/>
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formGridPassword">
                                     <Form.Label>Date de fin</Form.Label>
-                                    <Form.Control type="text" placeholder="Insérez la date de fin" />
+                                    <Form.Control type="text" placeholder="Insérez la date de fin" name="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)}/>
                                 </Form.Group>
                             </Row>
                             <Row className="mb-3">
                                 <Form.Group as={Col} controlId="formGridEmail">
                                     <Form.Label>Nombre de chambre</Form.Label>
-                                    <Form.Control type="number" placeholder="Insérez la date de début" />
+                                    <Form.Control type="number" placeholder="Insérez le nombre de chambre" name="rooms" value={rooms} onChange={(e) => setRooms(e.target.value)}/>
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formGridPassword">
@@ -41,6 +68,10 @@ const Login = () => {
                                     </Form.Select>
                                 </Form.Group>
                             </Row>
+                            <Button onClick={addRoom}>
+                               + Ajouter une chambre
+                            </Button>
+
                             <hr/>
                             <h3 className="blue mb-2">Nos options :</h3>
                             <Row>
@@ -142,7 +173,7 @@ const Login = () => {
                     </Col>
                 </Row>
             </Container>
-            <Footer/>
+            {/* <Footer/> */}
         </>
     );
 };

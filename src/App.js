@@ -11,12 +11,8 @@ import styles from './App.css';
 function App() {
   return (
     <>
-      <NavbarHotel/>
-
-      
-
-      <Footer/>
-
+      <NavbarHotel />
+      <Footer />
     </>
   );
 }
