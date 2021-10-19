@@ -1,5 +1,3 @@
-import Footer from '../include/footer';
-
 function Contact() {
     return (
         <>
