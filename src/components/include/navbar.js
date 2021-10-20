@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from 'react';
 
 import {
   BrowserRouter as Router,
@@ -16,8 +16,18 @@ import Contact from "../pages/Contact";
 import MyBookings from "../pages/MyBookings";
 import AddBooking from "../pages/AddBooking";
 
-class NavbarHotel extends Component {
-    render() {
+
+
+const NavbarHotel =() => {
+
+const [islogin ,setIslogin]= useState(false);
+const [isadmin ,setIsadmin]= useState(false);
+
+function  logout(){
+  localStorage.clear()
+  setIslogin(false)
+  setIsadmin(false);
+}
         return (
           <Router>
             <Navbar >
@@ -25,24 +35,31 @@ class NavbarHotel extends Component {
                 <Navbar.Brand href="#home">appHOTEL</Navbar.Brand>
                 <Nav className="me-auto">
                   <Nav.Link><Link to="/">Accueil</Link></Nav.Link>
-                  <Nav.Link><Link to="/reserver">Réserver</Link></Nav.Link>
+                  <Nav.Link>
+                  {islogin &&(
+                    <Link to="/reserver">Réserver</Link>
+                  )}
+                  </Nav.Link>
+                  {isadmin &&(
                   <Nav.Link><Link to="/contact">Contact</Link></Nav.Link>
+                  )}
+                  {islogin &&(
                   <Nav.Link><Link to="/mes-reservations">Mes réservations</Link></Nav.Link>
+                  )}
                 </Nav>
                 <Navbar.Toggle />
-                <Navbar.Collapse className="justify-content-end">
+                <Navbar.Collapse className="justify-content-end">                  
                     <Navbar.Text>
-                      <Link to="/login">Connexion</Link>
-                    </Navbar.Text>
-                    <Navbar.Text>
-                      &nbsp;|&nbsp;
-                    </Navbar.Text>
-                    <Navbar.Text>
-                        <Link to="/signup">Inscription</Link>
-                    </Navbar.Text>
-                    &nbsp;|&nbsp;
-                    <Navbar.Text>
-                      <Link to="/" onClick ={()=>localStorage.clear()}>Déconnexion</Link>
+                    
+                    {islogin ?(
+                      <Link to="/" onClick ={logout}>Déconnexion</Link>
+                    ):
+                    <div>
+                    <Link to="/signup">Inscription</Link>
+                    &nbsp;|
+                    <Link to="/login">Connexion</Link>
+                    </div>
+                    } 
                     </Navbar.Text>
                 </Navbar.Collapse>
               </Container>
@@ -61,7 +78,7 @@ class NavbarHotel extends Component {
                 <MyBookings/>
               </Route>
               <Route path="/login">
-                <Login/>
+                <Login islogin={islogin} setIslogin={setIslogin} setIsadmin={setIsadmin}/>
               </Route>
               <Route path="/signup">
                 <SignUp/>
@@ -69,7 +86,7 @@ class NavbarHotel extends Component {
             </Switch>
           </Router>
         );
-    }
+    
 }
 
 export default NavbarHotel;

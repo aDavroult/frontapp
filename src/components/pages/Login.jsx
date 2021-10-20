@@ -6,13 +6,15 @@ import { Button, Col, Container, Form, Row} from 'react-bootstrap';
 import { Link,useHistory} from 'react-router-dom';
 import axios from 'axios'; 
 import MyBookings from '../pages/MyBookings';
+import { getRoles } from '../outils/helpers'
 
 
-const Login = () => {
+const Login = ({islogin,setIslogin,isadmin,setIsadmin}) => {
+    
+    
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const history = useHistory(); 
-
     const handleSubmit = e => {
         e.preventDefault();
         const data = {
@@ -23,10 +25,19 @@ const Login = () => {
         .then(res => {
             console.log(res)
             localStorage.setItem('token',res.data.token)
-            history.push("/reserver");
+            setIslogin(true);
+            const isornotadmin = getRoles().includes('ROLE_ADMIN');
+            console.log(isornotadmin)
+            setIsadmin(isornotadmin);
+            if(isornotadmin){
+                history.push("/contact");
+            }
+            else{
+                history.push("/reserver");
+            }
+                
         })
         .catch(err => {
-            
             console.log(err)
         })
         console.log(email);

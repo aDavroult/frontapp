@@ -82,7 +82,7 @@ function RoomList() {
                     </Col>
                 </Row>
             </Container>
-            <Footer/>
+            
         </>
     )
 }

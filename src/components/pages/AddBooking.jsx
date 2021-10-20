@@ -7,8 +7,10 @@ import {Button, Col, Container, Form, Row, Carousel, Image} from "react-bootstra
 import {
   Link
 } from "react-router-dom";
+import { getRoles } from '../outils/helpers'
 
 const Login = () => {
+    console.log(getRoles());
     return (
         <>
             <Container className="mb-5 mt-5">
@@ -142,7 +144,6 @@ const Login = () => {
                     </Col>
                 </Row>
             </Container>
-            <Footer/>
         </>
     );
 };

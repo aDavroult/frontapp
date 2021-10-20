@@ -42,6 +42,7 @@ const SignUp = () => {
         .catch(err => {
             
             console.log(err)
+            
             alert("Email existe déja")
             
         })
