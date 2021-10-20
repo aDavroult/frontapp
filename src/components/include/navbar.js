@@ -70,7 +70,7 @@ function  logout(){
                     <div>
                     <Link to="/signup">Inscription</Link>
                     &nbsp;|
-                    <Link to="/login">Connexion</Link>
+                    <Link to="/login"> Connexion</Link>
                     </div>
                     } 
                     </Navbar.Text>
