@@ -4,7 +4,7 @@ import {Button, Col, Container, Form, Row} from "react-bootstrap";
 
 import axios from 'axios'; 
 
-const Login = () => {
+const AddRoom = () => {
 
     const [imageFile,setImageFile] = useState('');
     const [number,setNumber] = useState('');
@@ -93,4 +93,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default AddRoom;
