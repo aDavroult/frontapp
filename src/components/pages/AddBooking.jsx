@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { getRoles } from '../outils/helpers'
 
-const Login = () => {
+const AddBooking = () => {
     console.log(getRoles());
     return (
         <>
@@ -146,4 +146,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default AddBooking;

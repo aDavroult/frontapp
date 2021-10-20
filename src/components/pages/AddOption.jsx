@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 
-const Login = () => {
+const AddOption = () => {
     return (
         <>
             <Container className="mb-5">
@@ -41,4 +41,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default AddOption;
