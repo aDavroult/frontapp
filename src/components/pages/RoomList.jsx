@@ -1,5 +1,3 @@
-import Footer from '../include/footer';
-
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 
 function RoomList() {

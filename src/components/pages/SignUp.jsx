@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-import Footer from '../include/footer';
-
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 
 import {

@@ -7,7 +7,7 @@ import {
   Link
 } from "react-router-dom";
 
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Navbar, Nav, Container, DropdownButton, Dropdown } from 'react-bootstrap';
 
 import Login from '../pages/Login';
 import Home from '../pages/Home';
@@ -15,6 +15,8 @@ import SignUp from "../pages/SignUp";
 import Contact from "../pages/Contact";
 import MyBookings from "../pages/MyBookings";
 import AddBooking from "../pages/AddBooking";
+import AddOption from "../pages/AddOption";
+import AddRoom from "../pages/AddRoom";
 
 
 
@@ -46,6 +48,15 @@ function  logout(){
                   {islogin &&(
                   <Nav.Link><Link to="/mes-reservations">Mes réservations</Link></Nav.Link>
                   )}
+                  <DropdownButton
+                    variant="outline-secondary"
+                    title="Administration"
+                    id="input-group-dropdown-1"
+                  >
+                    <Dropdown.Item><Nav.Link><Link to="/add-room">Ajouter une chambre</Link></Nav.Link></Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item><Nav.Link><Link to="/add-option">Ajouter une option</Link></Nav.Link></Dropdown.Item>
+                  </DropdownButton>
                 </Nav>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">                  
@@ -76,6 +87,12 @@ function  logout(){
               </Route>
               <Route path="/mes-reservations">
                 <MyBookings/>
+              </Route>
+              <Route path="/add-room">
+                <AddRoom/>
+              </Route>
+              <Route path="/add-option">
+                <AddOption/>
               </Route>
               <Route path="/login">
                 <Login islogin={islogin} setIslogin={setIslogin} setIsadmin={setIsadmin}/>

@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
-import NavbarHotel from './components/include/navbar.js'
-import Footer from './components/include/footer';
-
 import '../node_modules/react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,11 +10,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://127.0.0.1:8000/';
+axios.defaults.baseURL = 'https://apphot.herokuapp.com/';
 
 ReactDOM.render(
   <React.StrictMode>
+
     <App/>   
+
   </React.StrictMode>,
   document.getElementById('root')
 );
