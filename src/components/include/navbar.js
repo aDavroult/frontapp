@@ -42,12 +42,13 @@ function  logout(){
                     <Link to="/reserver">Réserver</Link>
                   )}
                   </Nav.Link>
-                  {isadmin &&(
+                  
                   <Nav.Link><Link to="/contact">Contact</Link></Nav.Link>
-                  )}
+                  
                   {islogin &&(
                   <Nav.Link><Link to="/mes-reservations">Mes réservations</Link></Nav.Link>
                   )}
+                  {isadmin &&(
                   <DropdownButton
                     variant="outline-secondary"
                     title="Administration"
@@ -57,6 +58,7 @@ function  logout(){
                     <Dropdown.Divider />
                     <Dropdown.Item><Nav.Link><Link to="/add-option">Ajouter une option</Link></Nav.Link></Dropdown.Item>
                   </DropdownButton>
+                  )}
                 </Nav>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">                  
