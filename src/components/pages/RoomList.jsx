@@ -1,88 +1,62 @@
-import { Container, Row, Col, Button, Card } from 'react-bootstrap';
+import React from 'react';
 
-function RoomList() {
+import {Container, Row, Col, Button, Table} from "react-bootstrap";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { faEye } from '@fortawesome/fontawesome-free-solid';
+import { faEdit } from '@fortawesome/fontawesome-free-solid';
+import { faTrash } from '@fortawesome/fontawesome-free-solid'
+
+const RoomList = () => {
     return (
         <>
             <Container className="mb-5">
-                <Row className="mt-5 text-center">
-                    <h1 className="white">Liste de nos chambres</h1>
-                    <Col md={3} className="mt-5 mb-5">
-                        <Card >
-                            <Card.Img variant="top" src="https://www.usine-digitale.fr/mediatheque/3/9/8/000493893/hotel-c-o-q-paris.jpg" />
-                            <Card.Body>
-                                <Card.Title>Chambre n°91</Card.Title>
-                                <Card.Text>
-                                DESCRIPTION DE LA CHAMBREEEEEEEEEE
-                                </Card.Text>
-                                <Button className="text-center white" variant="dark">Voir</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col md={3} className="mt-5 mb-5">
-                        <Card >
-                            <Card.Img variant="top" src="https://www.usine-digitale.fr/mediatheque/3/9/8/000493893/hotel-c-o-q-paris.jpg" />
-                            <Card.Body>
-                                <Card.Title>Chambre n°99</Card.Title>
-                                <Card.Text>
-                                DESCRIPTION DE LA CHAMBREEEEEEEEEE
-                                </Card.Text>
-                                <Button className="text-center white" variant="dark">Voir</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col md={3} className="mt-5 mb-5">
-                        <Card >
-                            <Card.Img variant="top" src="https://www.usine-digitale.fr/mediatheque/3/9/8/000493893/hotel-c-o-q-paris.jpg" />
-                            <Card.Body>
-                                <Card.Title>Chambre n°102</Card.Title>
-                                <Card.Text>
-                                DESCRIPTION DE LA CHAMBREEEEEEEEEE
-                                </Card.Text>
-                                <Button className="text-center white" variant="dark">Voir</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col md={3} className="mt-5 mb-5">
-                        <Card >
-                            <Card.Img variant="top" src="https://www.usine-digitale.fr/mediatheque/3/9/8/000493893/hotel-c-o-q-paris.jpg" />
-                            <Card.Body>
-                                <Card.Title>Chambre n°203</Card.Title>
-                                <Card.Text>
-                                DESCRIPTION DE LA CHAMBREEEEEEEEEE
-                                </Card.Text>
-                                <Button className="text-center white" variant="dark">Voir</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col md={3} className="mt-5 mb-5">
-                        <Card >
-                            <Card.Img variant="top" src="https://www.usine-digitale.fr/mediatheque/3/9/8/000493893/hotel-c-o-q-paris.jpg" />
-                            <Card.Body>
-                                <Card.Title>Chambre n°234</Card.Title>
-                                <Card.Text>
-                                DESCRIPTION DE LA CHAMBREEEEEEEEEE
-                                </Card.Text>
-                                <Button className="text-center white" variant="dark">Voir</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col md={3} className="mt-5 mb-5">
-                        <Card >
-                            <Card.Img variant="top" src="https://www.usine-digitale.fr/mediatheque/3/9/8/000493893/hotel-c-o-q-paris.jpg" />
-                            <Card.Body>
-                                <Card.Title>Chambre n°279</Card.Title>
-                                <Card.Text>
-                                DESCRIPTION DE LA CHAMBREEEEEEEEEE
-                                </Card.Text>
-                                <Button className="text-center white" variant="dark">Voir</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+                <Row className="mt-5 form-box offset-md-1 col-md-10 p-3">
+                    <h1 className="mt-5 mb-5 text-center blue">Liste des chambres</h1>
+                    <Table responsive="md" className="text-center">
+                        <thead>
+                        <tr>
+                            <th>Numéro de la chambre</th>
+                            <th>Type de chambre</th>
+                            <th>Prix de la chambre</th>
+                            <th>Voir</th>
+                            <th>Modifier</th>
+                            <th>Supprimer</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Simple</td>
+                            <td>49€</td>
+                            <td><a href="room-list"><FontAwesomeIcon icon={faEye}/></a></td>
+                            <td><a href="room-list"><FontAwesomeIcon icon={faEdit} /></a></td>
+                            <td><a href="room-list"><FontAwesomeIcon icon={faTrash} /></a></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Simple</td>
+                            <td>59€</td>
+                            <td><a href="room-list"><FontAwesomeIcon icon={faEye}/></a></td>
+                            <td><a href="room-list"><FontAwesomeIcon icon={faEdit} /></a></td>
+                            <td><a href="room-list"><FontAwesomeIcon icon={faTrash} /></a></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Double</td>
+                            <td>79€</td>
+                            <td><a href="room-list"><FontAwesomeIcon icon={faEye}/></a></td>
+                            <td><a href="room-list"><FontAwesomeIcon icon={faEdit} /></a></td>
+                            <td><a href="room-list"><FontAwesomeIcon icon={faTrash} /></a></td>
+                        </tr>
+                        </tbody>
+                    </Table>
                 </Row>
             </Container>
             
         </>
-    )
-}
+    );
+};
 
 export default RoomList;

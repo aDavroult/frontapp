@@ -17,6 +17,7 @@ import MyBookings from "../pages/MyBookings";
 import AddBooking from "../pages/AddBooking";
 import AddOption from "../pages/AddOption";
 import AddRoom from "../pages/AddRoom";
+import RoomList from '../pages/RoomList';
 
 
 
@@ -54,8 +55,9 @@ function  logout(){
                     title="Administration"
                     id="input-group-dropdown-1"
                   >
-                    <Dropdown.Item><Nav.Link><Link to="/add-room">Ajouter une chambre</Link></Nav.Link></Dropdown.Item>
+                    <Dropdown.Item><Nav.Link><Link to="/room-list">Liste des chambres</Link></Nav.Link></Dropdown.Item>
                     <Dropdown.Divider />
+                    <Dropdown.Item><Nav.Link><Link to="/add-room">Ajouter une chambre</Link></Nav.Link></Dropdown.Item>
                     <Dropdown.Item><Nav.Link><Link to="/add-option">Ajouter une option</Link></Nav.Link></Dropdown.Item>
                   </DropdownButton>
                   )}
@@ -89,6 +91,9 @@ function  logout(){
               </Route>
               <Route path="/mes-reservations">
                 <MyBookings/>
+              </Route>
+              <Route path="/room-list">
+                <RoomList/>
               </Route>
               <Route path="/add-room">
                 <AddRoom/>
