@@ -1,44 +1,54 @@
 import React, { useState } from 'react';
 
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import {useHistory} from 'react-router-dom';
 
 import axios from 'axios'; 
+import { verifietoken } from '../outils/helpers'
+
+
 
 const AddRoom = () => {
 
-    const [imageFile,setImageFile] = useState('');
-    const [number,setNumber] = useState('');
-    const [type,setType] = useState('');
-    const [price,setPrice] = useState('');
+    const [imageFile,setImageFile] = useState(null);
+    const [number,setNumber] = useState();
+    const [type,setType] = useState('simple');
+    const [price,setPrice] = useState();
+    const history = useHistory();
 
     const handleSubmit = e => {
+        if(verifietoken()){
         e.preventDefault();
-        const data = {
-            imageFile:imageFile,
-            number:number,
-            type:type,
-            price:price
-        }
+        console.log(imageFile);
+        const data = new FormData();
+        data.append('number',number);
+        data.append('type',type);
+        data.append('price',price);
+        data.append('imageFile', imageFile);
         axios({
             method: "post",
-            url: "https://apphot.herokuapp.com/api/rooms/with/image",
+            url: "api/rooms/with/image",
             data: data,
-            headers: { "Content-Type": "multipart/form-data" },
-          })
+            headers: {  
+                'Content-Type': 'multipart/form-data',
+                'Authorization':'Bearer '+ localStorage.getItem("token")
+            }
+        })
         .then(res => {
-            alert(res);
-            console.log(res)
+            alert("la chambre est bien rajoutée")
+            console.log(res.data)
         })
         .catch(err => {
             alert(err);
             console.log(err)
         })
-        console.log(imageFile);
-        console.log(number);
-        console.log(type);
-        console.log(price);
+        }
+        else{
+            localStorage.clear()
+            alert("Votre session est expirer")
+            history.push("/login");
+        }
     }
-
     return (
         <>
             <Container className="mb-5">
@@ -48,12 +58,12 @@ const AddRoom = () => {
                         <Form onSubmit={handleSubmit}>
                             <Form.Group controlId="imageFile" className="mb-3">
                                 <Form.Label>Photos de la chambre</Form.Label>
-                                <Form.Control type="file" multiple />
+                                <Form.Control type="file" onChange={event =>setImageFile(event.target.files[0])} />
                             </Form.Group>
 
                             <Form.Group controlId="number" className="mb-3">
                                 <Form.Label>Numéro de la chambre *</Form.Label>
-                                <Form.Control type="number" placeholder="Insérez le numéro de la chambre" onChange={e => setNumber(e.target.value)} required/>
+                                <Form.Control type="number" placeholder="Insérez le numéro de la chambre" onChange={e => setNumber(parseInt(e.target.value))} required/>
                                 <Form.Text className="text-muted">
                                     Ce champ est obligatoire.
                                 </Form.Text>
@@ -72,7 +82,7 @@ const AddRoom = () => {
 
                             <Form.Group controlId="price" className="mb-3">
                                 <Form.Label>Prix de la chambre *</Form.Label>
-                                <Form.Control type="number" placeholder="Insérez le prix de la chambre" onChange={e => setPrice(e.target.value)} required/>
+                                <Form.Control type="number" placeholder="Insérez le prix de la chambre" onChange={e => setPrice(parseFloat(e.target.value))} required/>
                                 <Form.Text className="text-muted">
                                     Ce champ est obligatoire.
                                 </Form.Text>
