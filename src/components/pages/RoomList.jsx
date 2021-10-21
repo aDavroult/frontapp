@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 
 import {Container, Row, Col, Button, Table} from "react-bootstrap";
 
@@ -11,7 +11,8 @@ import { faTrash } from '@fortawesome/fontawesome-free-solid'
 import axios from 'axios'; 
 
 const RoomList = () => {
-    
+    const [isDisplay,setIsDisplay]=useState(true)
+    useEffect(() => {
         axios({
             method: "get",
             url: "api/rooms",
@@ -25,6 +26,7 @@ const RoomList = () => {
         .catch(err => {
             console.log(err)
         })
+    },(isDisplay));
         
     return (
         <>
