@@ -81,21 +81,27 @@ function  logout(){
               <Route exact path="/">
                 <Home/>
               </Route>
+              {islogin &&(
               <Route path="/reserver">
                 <AddBooking/>
               </Route>
+              )}
               <Route path="/contact">
                 <Contact/>
               </Route>
               <Route path="/mes-reservations">
                 <MyBookings/>
               </Route>
+              {isadmin &&(
               <Route path="/add-room">
                 <AddRoom/>
               </Route>
+              )}
+              {isadmin &&(
               <Route path="/add-option">
                 <AddOption/>
               </Route>
+              )}
               <Route path="/login">
                 <Login islogin={islogin} setIslogin={setIslogin} setIsadmin={setIsadmin}/>
               </Route>
