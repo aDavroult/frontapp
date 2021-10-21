@@ -11,11 +11,16 @@ import { faTrash } from '@fortawesome/fontawesome-free-solid'
 import axios from 'axios'; 
 
 const RoomList = () => {
-
     
-        axios.get("api/rooms")
+        axios({
+            method: "get",
+            url: "api/rooms",
+            headers: {  
+                'Authorization':'Bearer '+ localStorage.getItem("token")
+            }
+        })
         .then(res => {
-            console.log(res)
+            console.log(res.data)
         })
         .catch(err => {
             console.log(err)
@@ -38,30 +43,15 @@ const RoomList = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Simple</td>
-                            <td>49€</td>
-                            <td><a href="room-list"><FontAwesomeIcon icon={faEye}/></a></td>
-                            <td><a href="room-list"><FontAwesomeIcon icon={faEdit} /></a></td>
-                            <td><a href="room-list"><FontAwesomeIcon icon={faTrash} /></a></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Simple</td>
-                            <td>59€</td>
-                            <td><a href="room-list"><FontAwesomeIcon icon={faEye}/></a></td>
-                            <td><a href="room-list"><FontAwesomeIcon icon={faEdit} /></a></td>
-                            <td><a href="room-list"><FontAwesomeIcon icon={faTrash} /></a></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Double</td>
-                            <td>79€</td>
-                            <td><a href="room-list"><FontAwesomeIcon icon={faEye}/></a></td>
-                            <td><a href="room-list"><FontAwesomeIcon icon={faEdit} /></a></td>
-                            <td><a href="room-list"><FontAwesomeIcon icon={faTrash} /></a></td>
-                        </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td>Simple</td>
+                                <td>49€</td>
+                                <td><a href="room-list"><FontAwesomeIcon icon={faEye}/></a></td>
+                                <td><a href="room-list"><FontAwesomeIcon icon={faEdit} /></a></td>
+                                <td><a href="room-list"><FontAwesomeIcon icon={faTrash} /></a></td>
+                            </tr>
                         </tbody>
                     </Table>
                 </Row>
