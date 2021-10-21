@@ -7,7 +7,6 @@ import { Link,useHistory} from 'react-router-dom';
 import axios from 'axios'; 
 import MyBookings from '../pages/MyBookings';
 
-
 const Login = () => {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
@@ -26,7 +25,6 @@ const Login = () => {
             history.push("/reserver");
         })
         .catch(err => {
-            
             console.log(err)
         })
         console.log(email);

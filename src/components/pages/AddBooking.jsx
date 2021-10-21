@@ -1,29 +1,49 @@
-import React, {useState} from 'react';
-
-import Footer from '../include/footer';
+import React, {useState, useEffect} from 'react';
 
 import {Button, Col, Container, Form, Row, Carousel, Image} from "react-bootstrap";
 
-const Login = () => {
+import axios from 'axios';
+
+const AddBooking = () => {
     const [dateStart, setDateStart] = useState('');
     const [endDate, setEndDate] = useState('');
     const [price, setPrice] = useState(10);
     const [rooms, setRooms] = useState('');
-    const [options, setOptions] = useState('');
+    const [options, setOptions] = useState([]);
 
-    const handleSubmit = e => {
-        // e.preventDefault();
-        console.log(e);
+    const [optionList, setOptionList] = useState([]);
 
-        axios.post('https://apphot.herokuapp.com/api/bookings/')
+    const getOptions = () => {
+        axios.get('http://127.0.0.1:8000/api/options')
         .then((response) => {
-            setDateStart(dateStart);
-            setEndDate(endDate);
-            setPrice(price);
-            setRooms(rooms);
-            setOptions(options);
+            console.log(response);
+            const availableOptions = response.data;
+            setOptionList(availableOptions);
         })
     }
+
+    useEffect(() => getOptions(), []);
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        const data = {
+            dateStart:dateStart,
+            endDate:endDate,
+            price:price,
+            rooms:rooms,
+            options:options
+        }
+        axios.post('https://apphot.herokuapp.com/api/bookings', data)
+        .then(res => {
+            console.log(res)
+            // history.push("/reserver");
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    // const availableOptions = axios.get('https://apphot.herokuapp.com/api/options'):
 
     const addRoom = e => {
         e.preventDefault();
@@ -51,14 +71,14 @@ const Login = () => {
                             <Row className="mb-3">
                                 <Form.Group as={Col} controlId="formGridEmail">
                                     <Form.Label>Nombre de chambre</Form.Label>
-                                    <Form.Control type="number" placeholder="Insérez le nombre de chambre" name="rooms" value={rooms} onChange={(e) => setRooms(e.target.value)}/>
+                                    <Form.Control type="number" placeholder="Insérez le nombre de chambre" name="" />
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formGridPassword">
                                     <Form.Label>Type de chambre</Form.Label>
                                     <Form.Select aria-label="Type de chambre">
-                                        <option value="1">Simple</option>
-                                        <option value="2">Double</option>
+                                        <option value="simple" onChange={(e) => setRooms(e.target.value)}>Simple</option>
+                                        <option value="doudle" onChange={(e) => setRooms(e.target.value)}>Double</option>
                                     </Form.Select>
                                 </Form.Group>
                             </Row>
@@ -68,56 +88,21 @@ const Login = () => {
 
                             <hr/>
                             <h3 className="blue mb-2">Nos options :</h3>
+
+                            
                             <Row>
-                                <Col className="col-md-4">
-                                <Form.Check
-                                    type="checkbox"
-                                    id="autoSizingCheck"
-                                    className="mb-2"
-                                    label="Petit déjeuner"
-                                />
-                                </Col>
-                                <Col className="col-md-4">
-                                <Form.Check
-                                    type="checkbox"
-                                    id="autoSizingCheck"
-                                    className="mb-2"
-                                    label="Piscine"
-                                />
-                                </Col>
-                                <Col className="col-md-4">
-                                <Form.Check
-                                    type="checkbox"
-                                    id="autoSizingCheck"
-                                    className="mb-2"
-                                    label="Parking"
-                                />
-                                </Col>
-                                <Col className="col-md-4">
-                                <Form.Check
-                                    type="checkbox"
-                                    id="autoSizingCheck"
-                                    className="mb-2"
-                                    label="Diner"
-                                />
-                                </Col>
-                                <Col className="col-md-4">
-                                <Form.Check
-                                    type="checkbox"
-                                    id="autoSizingCheck"
-                                    className="mb-2"
-                                    label="Wi-fi"
-                                />
-                                </Col>
-                                <Col className="col-md-4">
-                                <Form.Check
-                                    type="checkbox"
-                                    id="autoSizingCheck"
-                                    className="mb-2"
-                                    label="Mini bar"
-                                />
-                                </Col>
+                                {optionList.map((optionList) => (
+                                    <Col className="col-md-4">
+                                        <Form.Check
+                                            type="checkbox"
+                                            id="autoSizingCheck"
+                                            className="mb-2"
+                                            label={optionList.name}
+                                        />
+                                    </Col>
+                                ))}
                             </Row>
+
                             <Row className="mt-5">
                                 <Col className="offset-md-3 col-md-6 text-center mb-3">
                                     <Button variant="dark btn-block" type="submit" className="white">
@@ -167,12 +152,8 @@ const Login = () => {
                     </Col>
                 </Row>
             </Container>
-<<<<<<< HEAD
-            {/* <Footer/> */}
-=======
->>>>>>> 52ced608468356e828345f545fe2e301e60d3807
         </>
     );
 };
 
-export default Login;
+export default AddBooking;
