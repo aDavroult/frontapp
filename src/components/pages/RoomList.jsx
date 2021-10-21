@@ -8,7 +8,19 @@ import { faEye } from '@fortawesome/fontawesome-free-solid';
 import { faEdit } from '@fortawesome/fontawesome-free-solid';
 import { faTrash } from '@fortawesome/fontawesome-free-solid'
 
+import axios from 'axios'; 
+
 const RoomList = () => {
+
+    
+        axios.get("api/rooms")
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        
     return (
         <>
             <Container className="mb-5">
