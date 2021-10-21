@@ -19,10 +19,10 @@ export function verifietoken(){
     
     if (endTime < now) {
         console.log("Token expired.");
-        return 0
+        return false
     } else {
         console.log("Valid token");  
-        return 1
+        return true
     }
 }
 export function getRoles(){

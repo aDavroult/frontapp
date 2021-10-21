@@ -29,7 +29,7 @@ const Login = ({islogin,setIslogin,isadmin,setIsadmin}) => {
             console.log(isornotadmin)
             setIsadmin(isornotadmin);
             if(isornotadmin){
-                history.push("/contact");
+                history.push("/add-room");
             }
             else{
                 history.push("/reserver");
