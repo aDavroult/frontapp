@@ -18,7 +18,8 @@ import AddBooking from "../pages/AddBooking";
 import AddOption from "../pages/AddOption";
 import AddRoom from "../pages/AddRoom";
 import RoomList from '../pages/RoomList';
-
+import EditRoom from '../pages/EditRoom';
+import ViewRoom from '../pages/ViewRoom';
 
 
 const NavbarHotel =() => {
@@ -107,6 +108,8 @@ function  logout(){
               <Route path="/signup">
                 <SignUp/>
               </Route>
+              <Route path='/room-edit/:id' component={EditRoom} />
+              <Route path='/room-view/:id' component={ViewRoom} />
             </Switch>
           </Router>
         );
