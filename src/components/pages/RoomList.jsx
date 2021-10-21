@@ -11,20 +11,25 @@ import { faTrash } from '@fortawesome/fontawesome-free-solid'
 import axios from 'axios'; 
 
 const RoomList = () => {
-    
-        axios({
-            method: "get",
-            url: "api/rooms",
-            headers: {  
-                'Authorization':'Bearer '+ localStorage.getItem("token")
-            }
-        })
-        .then(res => {
-            console.log(res.data)
-        })
-        .catch(err => {
-            console.log(err)
-        })
+
+        const [roomsList, setRoomsList] = useState([]);
+        const [isDisplay, setIsDisplay] = useState(true);
+        
+        useEffect(() => {
+            axios({
+                method: "get",
+                url: "api/rooms",
+                headers: {  
+                    'Authorization':'Bearer '+ localStorage.getItem("token")
+                }
+            })
+            .then((response) => {
+                console.log(response);
+                const availableRooms = response.data;
+                setRoomsList(availableRooms);
+                setIsDisplay(false)
+            })
+        },(isDisplay));
         
     return (
         <>
@@ -44,14 +49,16 @@ const RoomList = () => {
                         </thead>
                         <tbody>
 
-                            <tr>
-                                <td>1</td>
-                                <td>Simple</td>
-                                <td>49€</td>
-                                <td><a href="room-list"><FontAwesomeIcon icon={faEye}/></a></td>
-                                <td><a href="room-list"><FontAwesomeIcon icon={faEdit} /></a></td>
-                                <td><a href="room-list"><FontAwesomeIcon icon={faTrash} /></a></td>
-                            </tr>
+                            {roomsList.map((roomsList) => (
+                                <tr>
+                                    <td>{roomsList.number}</td>
+                                    <td>{roomsList.type}</td>
+                                    <td>{roomsList.price}€</td>
+                                    <td><a href={"/room-view/"+ roomsList.id}><FontAwesomeIcon icon={faEye}/></a></td>
+                                    <td><a href={"/room-edit/"+ roomsList.id}><FontAwesomeIcon icon={faEdit} /></a></td>
+                                    <td><a href={"/rooms/"+ roomsList.id}><FontAwesomeIcon icon={faTrash} /></a></td>
+                                </tr>
+                            ))}
                         </tbody>
                     </Table>
                 </Row>
