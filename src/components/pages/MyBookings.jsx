@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Footer from '../include/footer';
-
 import {Container, Row, Col, Button} from "react-bootstrap";
 
 
@@ -94,6 +92,7 @@ const myBookings = () => {
 
                 </Row>
             </Container>
+            
         </>
     );
 };

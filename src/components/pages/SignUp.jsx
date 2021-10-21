@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-import Footer from '../include/footer';
-
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 
 import {
@@ -42,6 +40,7 @@ const SignUp = () => {
         .catch(err => {
             
             console.log(err)
+            
             alert("Email existe déja")
             
         })

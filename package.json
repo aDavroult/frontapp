@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/react-fontawesome": "^0.1.15",
     "@testing-library/jest-dom": "^5.11.4",
@@ -10,6 +11,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.23.0",
     "bootstrap": "^5.1.1",
+    "jwt-decode": "^3.1.2",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-rc.0",
     "react-constraint-validation": "^0.2.1",

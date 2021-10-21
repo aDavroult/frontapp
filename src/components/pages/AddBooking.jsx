@@ -5,6 +5,8 @@ import {Button, Col, Container, Form, Row, Carousel, Image} from "react-bootstra
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+import { getRoles } from '../outils/helpers'
+
 const AddBooking = () => {
     const [dateStart, setDateStart] = useState('');
     const [endDate, setEndDate] = useState('');
@@ -22,6 +24,8 @@ const AddBooking = () => {
             setOptionList(availableOptions);
         })
     }
+
+    console.log(getRoles());
 
     useEffect(() => getOptions(), []);
 
@@ -50,6 +54,7 @@ const AddBooking = () => {
         e.preventDefault();
         console.log('new Room');
     }
+
 
     return (
         <>
@@ -156,5 +161,4 @@ const AddBooking = () => {
         </>
     );
 };
-
 export default AddBooking;
