@@ -6,7 +6,9 @@ import {useHistory} from 'react-router-dom';
 import axios from 'axios'; 
 import { verifietoken } from '../outils/helpers'
 
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+
+
 
 
 
@@ -114,9 +116,14 @@ const EditRoom = () => {
                             </Form.Group>
 
                             <Row className="mt-5">
-                                <Col md={12} className="text-center mb-3">
+                                <Col md={6} className="text-center mb-3">
+                                    <Button variant="dark btn-block" type="submit">
+                                        <Link className="white" to="/room-list">RETOUR</Link>
+                                    </Button>
+                                </Col>
+                                <Col md={6} className="text-center mb-3">
                                     <Button variant="dark btn-block" type="submit" className="white">
-                                        MODIFIER
+                                        Modifier
                                     </Button>
                                 </Col>
                             </Row>
