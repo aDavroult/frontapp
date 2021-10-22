@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
 import {Container, Row, Col, Button, Table} from "react-bootstrap";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +8,7 @@ import { faEdit } from '@fortawesome/fontawesome-free-solid';
 import { faTrash } from '@fortawesome/fontawesome-free-solid'
 
 import axios from 'axios'; 
+import { Link } from 'react-router-dom';
 
 const RoomList = () => {
 
@@ -54,9 +54,9 @@ const RoomList = () => {
                                     <td>{roomsList.number}</td>
                                     <td>{roomsList.type}</td>
                                     <td>{roomsList.price}€</td>
-                                    <td><a href={"/room-view/"+ roomsList.id}><FontAwesomeIcon icon={faEye}/></a></td>
-                                    <td><a href={"/room-edit/"+ roomsList.id}><FontAwesomeIcon icon={faEdit} /></a></td>
-                                    <td><a href={"/rooms/"+ roomsList.id}><FontAwesomeIcon icon={faTrash} /></a></td>
+                                    <td><Link to={"/room-view/"+ roomsList.id}><FontAwesomeIcon icon={faEye}/></Link></td>
+                                    <td><Link to={"/room-edit/"+ roomsList.id}><FontAwesomeIcon icon={faEdit} /></Link></td>
+                                    <td><Link to={"/rooms/"+ roomsList.id}><FontAwesomeIcon icon={faTrash} /></Link></td>
                                 </tr>
                             ))}
                         </tbody>
