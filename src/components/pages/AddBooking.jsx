@@ -5,19 +5,30 @@ import {Button, Col, Container, Form, Row, Carousel, Image} from "react-bootstra
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import { getRoles } from '../outils/helpers'
+import { getRoles, getPriceOfSelectedRooms } from '../outils/helpers'
 
 const AddBooking = () => {
     const [dateStart, setDateStart] = useState('');
     const [endDate, setEndDate] = useState('');
     const [price, setPrice] = useState(10);
-    const [rooms, setRooms] = useState('');
+    const [getPrice, setGetPrice] = useState (1);
+    const [rooms, setRooms] = useState([]);
+    const [type, setType] = useState('simple');
+    const [number, setNumber] = useState(1);
     const [options, setOptions] = useState([]);
+
+    const [availableRooms, setAvailableRooms] = useState(null);
 
     const [optionList, setOptionList] = useState([]);
 
     const getOptions = () => {
-        axios.get('http://127.0.0.1:8000/api/options')
+        axios({
+            method: "get",
+            url: "api/options",
+            headers: {  
+                'Authorization':'Bearer '+ localStorage.getItem("token")
+            }
+        })
         .then((response) => {
             console.log(response);
             const availableOptions = response.data;
@@ -29,23 +40,102 @@ const AddBooking = () => {
 
     useEffect(() => getOptions(), []);
 
+    // check if rooms are available
     const handleSubmit = e => {
         e.preventDefault();
+
         const data = {
             dateStart:dateStart,
             endDate:endDate,
             price:price,
-            rooms:rooms,
-            options:options
+            type:type,
+            options:options,
+            number:number
         }
-        axios.post('https://apphot.herokuapp.com/api/bookings', data)
+        console.log(data)
+        axios({
+            method: "get",
+            url: `api/room/notbooking/${data.dateStart}/${data.endDate}/${data.type}`,
+            data: data,
+            headers: {  
+                'Authorization':'Bearer '+ localStorage.getItem("token")
+            }
+        })
+        // console.log(`api/room/notbooking/${data.dateStart}/${data.endDate}/${data.type}`)
+
         .then(res => {
-            console.log(res)
-            // history.push("/reserver");
+            console.log(res.data)
+            if (res.data.length >= number) {
+                setAvailableRooms(res.data);
+            }      
         })
         .catch(err => {
+            // console.log(`api/room/notbooking/${data.dateStart}/${data.endDate}/${data.type}`)
             console.log(err)
         })
+
+        if (availableRooms) {
+            
+            console.log(availableRooms);
+
+            const idRooms = [];
+            const idPrice = [];
+
+            availableRooms.map((availableRooms) => (
+               idRooms.push(availableRooms.id)
+            ))
+
+            console.log(idRooms.length+1);
+            const array_rand = require('array_rand');
+          
+            const result = array_rand.getRandomObjectsInRangeSync(idRooms, number, 1, idRooms.length-1);
+            array_rand.getRandomObjectsInRange(idRooms, number, 1, idRooms.length-1, function(err, result) {
+          
+                setRooms(result.map(item => `/api/rooms/${item}`)) ;
+                // let getPrice = result.map(item => console.log(getPriceOfSelectedRooms(item))) ;
+                console.log(rooms);
+                // console.log(getPrice);
+            });
+
+            // console.log(result);
+            // let getPrice = [];
+
+            // result.map(item => getPriceOfSelectedRooms(item).push()) 
+
+            // result.map((result) => (
+            //     getPrice.push(getPriceOfSelectedRooms(result)) 
+            // )
+            useEffect(() =>{
+                setGetPrice(getPriceOfSelectedRooms(43))
+            })
+
+
+            console.log(getPrice);
+
+            // const bookingData = {
+            //     dateStart:dateStart,
+            //     endDate:endDate,
+            //     totalPrice:price,
+            //     options:options,
+            //     rooms:rooms
+            // }
+
+            // axios({
+            //     method: "post",
+            //     url: "api/bookings",
+            //     data: bookingData,
+            //     headers: {  
+            //         'Authorization':'Bearer '+ localStorage.getItem("token")
+            //     }
+            // })
+            // .then(res => {
+            //     console.log(res.data)
+            // })
+            // .catch(err => {
+            //     // console.log(`api/room/notbooking/${data.dateStart}/${data.endDate}/${data.type}`)
+            //     console.log(err)
+            // })
+        }
     }
 
     // const availableOptions = axios.get('https://apphot.herokuapp.com/api/options'):
@@ -66,25 +156,25 @@ const AddBooking = () => {
                             <Row className="mb-3">
                                 <Form.Group as={Col} controlId="formGridEmail">
                                     <Form.Label>Date de début</Form.Label>
-                                    <Form.Control type="text" placeholder="Insérez la date de début" name="dateStart" value={dateStart} onChange={(e) => setDateStart(e.target.value)}/>
+                                    <Form.Control type="text" placeholder="Insérez la date de début - AAAA-MM-JJ" name="dateStart" value={dateStart} onChange={(e) => setDateStart(e.target.value)}/>
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formGridPassword">
                                     <Form.Label>Date de fin</Form.Label>
-                                    <Form.Control type="text" placeholder="Insérez la date de fin" name="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)}/>
+                                    <Form.Control type="text" placeholder="Insérez la date de fin - AAAA-MM-JJ" name="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)}/>
                                 </Form.Group>
                             </Row>
                             <Row className="mb-3">
                                 <Form.Group as={Col} controlId="formGridEmail">
                                     <Form.Label>Nombre de chambre</Form.Label>
-                                    <Form.Control type="number" placeholder="Insérez le nombre de chambre" name="" />
+                                    <Form.Control type="number" placeholder="Insérez le nombre de chambre" value={number} onChange={(e) => setNumber(e.target.value)} />
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formGridPassword">
                                     <Form.Label>Type de chambre</Form.Label>
-                                    <Form.Select aria-label="Type de chambre">
-                                        <option value="simple" onChange={(e) => setRooms(e.target.value)}>Simple</option>
-                                        <option value="doudle" onChange={(e) => setRooms(e.target.value)}>Double</option>
+                                    <Form.Select aria-label="Type de chambre" onChange={e => setType(e.target.value)}>
+                                        <option value="Simple">Simple</option>
+                                        <option value="Double">Double</option>
                                     </Form.Select>
                                 </Form.Group>
                             </Row>
@@ -95,7 +185,6 @@ const AddBooking = () => {
                             <hr/>
                             <h3 className="blue mb-2">Nos options :</h3>
 
-                            
                             <Row>
                                 {optionList.map((optionList) => (
                                     <Col className="col-md-4">

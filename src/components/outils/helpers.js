@@ -1,3 +1,4 @@
+import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 export function verifietoken(){
@@ -32,4 +33,22 @@ export function getRoles(){
     const decoded = jwt_decode(token);
     console.log(decoded);
     return decoded.roles;
+}
+export function getPriceOfSelectedRooms(id){
+    axios({
+        method: "get",
+        url: `api/rooms/${id}`,
+        headers: {  
+            'Authorization':'Bearer '+ localStorage.getItem("token")
+        }
+    })
+    .then(res => {
+        const selectedPrice = res.data.price;
+        console.log(selectedPrice);
+        return selectedPrice;
+    })
+    .catch(err => {
+        console.log(err)
+    })
+
 }
