@@ -10,6 +10,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 
+//'https://apphot.herokuapp.com/'  'https://127.0.0.1:8000/'
+
+
 axios.defaults.baseURL = 'https://apphot.herokuapp.com/';
 
 ReactDOM.render(

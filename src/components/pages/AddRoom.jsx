@@ -36,11 +36,12 @@ const AddRoom = () => {
         })
         .then(res => {
             alert("la chambre est bien rajoutée")
+            history.push("/room-list");
             console.log(res.data)
         })
         .catch(err => {
-            alert(err);
             console.log(err)
+            alert("le numéro de la chambre existe déja")
         })
         }
         else{

@@ -20,6 +20,7 @@ import AddRoom from "../pages/AddRoom";
 import RoomList from '../pages/RoomList';
 import EditRoom from '../pages/EditRoom';
 import ViewRoom from '../pages/ViewRoom';
+import DeleteRoom from '../pages/DeleteRoom';
 
 
 const NavbarHotel =() => {
@@ -118,6 +119,7 @@ function  logout(){
               </Route>
               <Route path='/room-edit/:id' component={EditRoom} />
               <Route path='/room-view/:id' component={ViewRoom} />
+              <Route path='/room-delete/:id' component={DeleteRoom} />
             </Switch>
           </Router>
         );

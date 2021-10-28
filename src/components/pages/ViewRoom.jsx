@@ -1,21 +1,17 @@
-import React, { useState, useEffect, handleSubmit } from 'react';
+import React, { useState, useEffect} from 'react';
 
 import {Button, Col, Container, Form, Image, Row} from "react-bootstrap";
-import {useHistory} from 'react-router-dom';
-
 import axios from 'axios'; 
 import { verifietoken } from '../outils/helpers'
-
-import { useParams } from "react-router-dom";
-
-
+import { useHistory, useParams, Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/fontawesome-free-solid';
 
 const ViewRoom = () => {
 
     const params = useParams();
     
     const [posts, setPosts] = useState([])
-    
     const [imageUrl,setImageUrl] = useState(null);
     const [number,setNumber] = useState();
     const [type,setType] = useState();
@@ -23,6 +19,7 @@ const ViewRoom = () => {
     const history = useHistory();
     
         useEffect(()=> {
+            if(verifietoken()){
             axios({
                 method: "get",
                 url: `api/rooms/${params.id}`,
@@ -41,26 +38,35 @@ const ViewRoom = () => {
             .catch(err =>{
                 console.log(err)
             })
-        }, [params.id])
+            }
+            else{
+                localStorage.clear()
+                alert("Votre session est expirer")
+                history.push("/login");
+            }
 
+        }, [params.id])
     return (
         <>
             <Container className="mb-5">
                 <Row className="mt-5 form-box offset-md-3 col-md-6">
-                    <h1 className="mt-5 text-center blue">Chambre {posts.id}</h1>
+                    <h1 className="mt-5 text-center blue">Chambre {type}</h1>
                     <Col className="p-5 m-auto rounded-lg">
                         <Row>
                             <Col className="col-md-12 text-center">
-                                <Image src={"https://apphot.herokuapp.com" + imageUrl} width="100%"></Image>
+                                <Image src={"https://apphot.herokuapp.com" + imageUrl} alt="image room" width="100%"></Image>
                             </Col>
                             <Col className="col-md-12 text-center">
-                                {number}
+                                Numéro : {number}
                             </Col>
                             <Col className="col-md-12 text-center">
-                                {type}
+                                Prix : {price} €
                             </Col>
                             <Col className="col-md-12 text-center">
-                                {price}
+                                <Button variant="dark btn-block" type="submit">
+                                    <Link className="white" to="/room-list">Retour</Link>
+
+                                </Button>
                             </Col>
                         </Row>
                     </Col>

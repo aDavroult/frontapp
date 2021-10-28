@@ -1,11 +1,10 @@
-import React, { useState, useEffect, handleSubmit } from 'react';
+import React, { useState, useEffect} from 'react';
 
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {useHistory} from 'react-router-dom';
 
 import axios from 'axios'; 
-import { verifietoken } from '../outils/helpers'
-
+import {verifietoken,editRoom,getRoom} from '../outils/helpers';
 import { useParams, Link } from "react-router-dom";
 
 
@@ -15,9 +14,7 @@ import { useParams, Link } from "react-router-dom";
 const EditRoom = () => {
 
     const params = useParams();
-    
     const [posts, setPosts] = useState([])
-    
     const [imageFile,setImageFile] = useState(null);
     const [number,setNumber] = useState();
     const [type,setType] = useState();
@@ -25,49 +22,18 @@ const EditRoom = () => {
     const history = useHistory();
     
         useEffect(()=> {
-            axios({
-                method: "get",
-                url: `api/rooms/${params.id}`,
-                headers: {  
-                    'Authorization':'Bearer '+ localStorage.getItem("token")
-                }
-            })
-            .then(res => {
-                console.log(res)
-                setPosts(res.data)
-                setNumber(res.data.number)
-                setType(res.data.type)
-                setPrice(res.data.price)
-            })
-            .catch(err =>{
-                console.log(err)
-            })
+            //get the room to disply it in the form befor edit it
+                getRoom(params.id,setPosts,setNumber,setType,setPrice,setImageFile)
+            //edit room
+            
         }, [params.id])
-
+    
     const handleSubmit = e => {
         if(verifietoken()){
         e.preventDefault();
-        const data = {
-            number:number,
-            type:type,
-            price:price
-        }
-        axios({
-            method: "put",
-            url: `api/rooms/${params.id}`,
-            data: data,
-            headers: {  
-                'Authorization':'Bearer '+ localStorage.getItem("token")
-            }
-        })
-        .then(res => {
-            alert("la chambre a été modifiée")
-            console.log(res.data)
-        })
-        .catch(err => {
-            alert(err);
-            console.log(err)
-        })
+        editRoom(params.id,number,type,price,imageFile)
+        alert("la chambre a été modifiée")
+        history.push("/room-list");
         }
         else{
             localStorage.clear()
@@ -75,7 +41,6 @@ const EditRoom = () => {
             history.push("/login");
         }
     }
-
     return (
         <>
             <Container className="mb-5">
@@ -87,7 +52,6 @@ const EditRoom = () => {
                                 <Form.Label>Photos de la chambre</Form.Label>
                                 <Form.Control type="file" onChange={event =>setImageFile(event.target.files[0])} />
                             </Form.Group>
-
                             <Form.Group controlId="number" className="mb-3">
                                 <Form.Label>Numéro de la chambre *</Form.Label>
                                 <Form.Control type="number" placeholder="Insérez le numéro de la chambre" onChange={e => setNumber(parseInt(e.target.value))} value={number} required/>
@@ -95,7 +59,6 @@ const EditRoom = () => {
                                     Ce champ est obligatoire.
                                 </Form.Text>
                             </Form.Group>
-
                             <Form.Group as={Col} controlId="type" className="mb-3">
                                 <Form.Label>Type de chambre *</Form.Label>
                                 <Form.Select aria-label="Type de chambre" onChange={e => setType(e.target.value)} value={type} required >
