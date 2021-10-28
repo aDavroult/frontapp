@@ -37,7 +37,8 @@ const Login = ({islogin,setIslogin,isadmin,setIsadmin}) => {
                 
         })
         .catch(err => {
-            console.log(err)
+            console.log(err);
+            alert(err)
         })
         console.log(email);
         console.log(password);
