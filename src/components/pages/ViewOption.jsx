@@ -7,14 +7,11 @@ import { useHistory, useParams, Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/fontawesome-free-solid';
 
-const ViewRoom = () => {
+const ViewOption = () => {
 
     const params = useParams();
     
-    const [posts, setPosts] = useState([])
-    const [imageUrl,setImageUrl] = useState(null);
-    const [number,setNumber] = useState();
-    const [type,setType] = useState();
+    const [name,setName] = useState();
     const [price,setPrice] = useState();
     const history = useHistory();
     
@@ -22,18 +19,15 @@ const ViewRoom = () => {
             if(verifietoken()){
             axios({
                 method: "get",
-                url: `api/rooms/${params.id}`,
+                url: `api/options/${params.id}`,
                 headers: {  
                     'Authorization':'Bearer '+ localStorage.getItem("token")
                 }
             })
             .then(res => {
                 console.log(res)
-                setPosts(res.data)
-                setNumber(res.data.number)
-                setType(res.data.type)
+                setName(res.data.name)
                 setPrice(res.data.price)
-                setImageUrl(res.data.imageUrl)
             })
             .catch(err =>{
                 console.log(err)
@@ -50,21 +44,17 @@ const ViewRoom = () => {
         <>
             <Container className="mb-5">
                 <Row className="mt-5 form-box offset-md-3 col-md-6">
-                    <h1 className="mt-5 text-center blue">Chambre {type}</h1>
                     <Col className="p-5 m-auto rounded-lg">
                         <Row>
                             <Col className="col-md-12 text-center">
-                                {imageUrl &&(<Image src={"http://127.0.0.1:8000/" + imageUrl}  alt="image room" width="100%"></Image>)}
-                            </Col>
-                            <Col className="col-md-12 text-center">
-                                Numéro : {number}
+                                Nom : {name}
                             </Col>
                             <Col className="col-md-12 text-center">
                                 Prix : {price} €
                             </Col>
                             <Col className="col-md-12 text-center">
                                 <Button variant="dark btn-block" type="submit">
-                                    <Link className="white" to="/room-list">Retour</Link>
+                                    <Link className="white" to="/option-list">Retour</Link>
 
                                 </Button>
                             </Col>
@@ -76,4 +66,4 @@ const ViewRoom = () => {
     );
 };
 
-export default ViewRoom;
+export default ViewOption;

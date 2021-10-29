@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 
-import {Button, Col, Container, Form, Row,Image} from "react-bootstrap";
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {useHistory} from 'react-router-dom';
 
 import axios from 'axios'; 
@@ -11,12 +11,11 @@ import { useParams, Link } from "react-router-dom";
 
 
 
-const EditRoom = () => {
+const EditOption = () => {
 
     const params = useParams();
     const [posts, setPosts] = useState([])
     const [imageFile,setImageFile] = useState(null);
-    const [imageUrl,setImageUrl] = useState(null);
     const [number,setNumber] = useState();
     const [type,setType] = useState();
     const [price,setPrice] = useState();
@@ -24,7 +23,7 @@ const EditRoom = () => {
     
         useEffect(()=> {
             //get the room to disply it in the form befor edit it
-                getRoom(params.id,setPosts,setNumber,setType,setPrice,setImageUrl)
+                getRoom(params.id,setPosts,setNumber,setType,setPrice,setImageFile)
             //edit room
             
         }, [params.id])
@@ -52,7 +51,6 @@ const EditRoom = () => {
                             <Form.Group controlId="imageFile" className="mb-3">
                                 <Form.Label>Photos de la chambre</Form.Label>
                                 <Form.Control type="file" onChange={event =>setImageFile(event.target.files[0])} />
-                                {imageUrl &&(<Image src={"http://127.0.0.1:8000/" + imageUrl}  alt="image room" width="100%"></Image>)}
                             </Form.Group>
                             <Form.Group controlId="number" className="mb-3">
                                 <Form.Label>Numéro de la chambre *</Form.Label>
@@ -100,4 +98,4 @@ const EditRoom = () => {
     );
 };
 
-export default EditRoom;
+export default EditOption;

@@ -57,7 +57,7 @@ export function editImageRoom(id,imageFile){
         })
         
 }
-export function getRoom(id,setPosts,setNumber,setType,setPrice,setImageFile){
+export function getRoom(id,setPosts,setNumber,setType,setPrice,setImageUrl){
     
     axios({
         method: "get",
@@ -72,12 +72,13 @@ export function getRoom(id,setPosts,setNumber,setType,setPrice,setImageFile){
         setNumber(res.data.number)
         setType(res.data.type)
         setPrice(res.data.price)
+        setImageUrl(res.data.imageUrl)
     })
     .catch(err =>{
         console.log(err)
     })
 
-return  {setPosts,setNumber,setType,setPrice}
+return  {setPosts,setNumber,setType,setPrice,setImageUrl}
 }
 export function editRoomWithoutImage(id,number,type,price){
     const data = {

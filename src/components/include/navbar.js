@@ -21,6 +21,13 @@ import RoomList from '../pages/RoomList';
 import EditRoom from '../pages/EditRoom';
 import ViewRoom from '../pages/ViewRoom';
 import DeleteRoom from '../pages/DeleteRoom';
+import OptionList from '../pages/OptionList';
+import EditOption from '../pages/EditOption';
+import ViewOption from '../pages/ViewOption';
+import DeleteOption from '../pages/DeleteOption';
+
+
+
 
 
 const NavbarHotel =() => {
@@ -58,6 +65,7 @@ function  logout(){
                     id="input-group-dropdown-1"
                   >
                     <Dropdown.Item><Nav.Link><Link to="/room-list">Liste des chambres</Link></Nav.Link></Dropdown.Item>
+                    <Dropdown.Item><Nav.Link><Link to="/option-list">Liste des options</Link></Nav.Link></Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item><Nav.Link><Link to="/add-room">Ajouter une chambre</Link></Nav.Link></Dropdown.Item>
                     <Dropdown.Item><Nav.Link><Link to="/add-option">Ajouter une option</Link></Nav.Link></Dropdown.Item>
@@ -111,6 +119,11 @@ function  logout(){
                 <RoomList/>
               </Route>
               )}
+              {isadmin &&(
+                <Route path="/option-list">
+                  <OptionList/>
+                </Route>
+              )}
               <Route path="/login">
                 <Login islogin={islogin} setIslogin={setIslogin} setIsadmin={setIsadmin}/>
               </Route>
@@ -120,6 +133,9 @@ function  logout(){
               <Route path='/room-edit/:id' component={EditRoom} />
               <Route path='/room-view/:id' component={ViewRoom} />
               <Route path='/room-delete/:id' component={DeleteRoom} />
+              <Route path='/option-edit/:id' component={EditOption} />
+              <Route path='/option-view/:id' component={ViewOption} />
+              <Route path='/option-delete/:id' component={DeleteOption} />
             </Switch>
           </Router>
         );
