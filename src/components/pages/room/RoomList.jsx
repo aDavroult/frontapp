@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {Container, Row, Col, Button, Table} from "react-bootstrap";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye,faEdit,faTrash } from '@fortawesome/fontawesome-free-solid';
 
-import { faEye } from '@fortawesome/fontawesome-free-solid';
-import { faEdit } from '@fortawesome/fontawesome-free-solid';
-import { faTrash } from '@fortawesome/fontawesome-free-solid'
 
 import axios from 'axios'; 
 import { Link } from 'react-router-dom';

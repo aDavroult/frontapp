@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "array_rand": "^1.0.7",
     "axios": "^0.23.0",
     "bootstrap": "^5.1.1",
     "jwt-decode": "^3.1.2",

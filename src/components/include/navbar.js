@@ -9,23 +9,25 @@ import {
 
 import { Navbar, Nav, Container, DropdownButton, Dropdown } from 'react-bootstrap';
 
-import Login from '../pages/Login';
+import Login from '../pages/user/Login';
 import Home from '../pages/Home';
-import SignUp from "../pages/SignUp";
+import SignUp from "../pages/user/SignUp";
+import UserList from "../pages/user/UserList";
+import EditUser from "../pages/user/EditUser";
+import DeleteUser from "../pages/user/DeleteUser";
 import Contact from "../pages/Contact";
 import MyBookings from "../pages/MyBookings";
-import AddBooking from "../pages/AddBooking";
-import AddOption from "../pages/AddOption";
-import AddRoom from "../pages/AddRoom";
-import RoomList from '../pages/RoomList';
-import EditRoom from '../pages/EditRoom';
-import ViewRoom from '../pages/ViewRoom';
-import DeleteRoom from '../pages/DeleteRoom';
-import OptionList from '../pages/OptionList';
-import EditOption from '../pages/EditOption';
-import ViewOption from '../pages/ViewOption';
-import DeleteOption from '../pages/DeleteOption';
-
+import AddBooking from "../pages/booking/AddBooking";
+import AddOption from "../pages/options/AddOption";
+import AddRoom from "../pages/room/AddRoom";
+import RoomList from '../pages/room/RoomList';
+import EditRoom from '../pages/room/EditRoom';
+import ViewRoom from '../pages/room/ViewRoom';
+import DeleteRoom from '../pages/room/DeleteRoom';
+import OptionList from '../pages/options/OptionList';
+import EditOption from '../pages/options/EditOption';
+import ViewOption from '../pages/options/ViewOption';
+import DeleteOption from '../pages/options/DeleteOption';
 
 
 
@@ -64,6 +66,7 @@ function  logout(){
                     title="Administration"
                     id="input-group-dropdown-1"
                   >
+                    <Dropdown.Item><Nav.Link><Link to="/user-list">Gestion d'utilisateur</Link></Nav.Link></Dropdown.Item>
                     <Dropdown.Item><Nav.Link><Link to="/room-list">Liste des chambres</Link></Nav.Link></Dropdown.Item>
                     <Dropdown.Item><Nav.Link><Link to="/option-list">Liste des options</Link></Nav.Link></Dropdown.Item>
                     <Dropdown.Divider />
@@ -124,6 +127,11 @@ function  logout(){
                   <OptionList/>
                 </Route>
               )}
+              {isadmin &&(
+                <Route path="/user-list">
+                  <UserList/>
+                </Route>
+              )}
               <Route path="/login">
                 <Login islogin={islogin} setIslogin={setIslogin} setIsadmin={setIsadmin}/>
               </Route>
@@ -136,6 +144,8 @@ function  logout(){
               <Route path='/option-edit/:id' component={EditOption} />
               <Route path='/option-view/:id' component={ViewOption} />
               <Route path='/option-delete/:id' component={DeleteOption} />
+              <Route path='/user-edit/:id' component={EditUser} />
+              <Route path='/user-delete/:id' component={DeleteUser} />
             </Switch>
           </Router>
         );

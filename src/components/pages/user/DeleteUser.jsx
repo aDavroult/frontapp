@@ -1,21 +1,21 @@
 import React, {useEffect} from 'react';
 import {useHistory,useParams} from 'react-router-dom';
-import {verifietoken,deleteRoom} from '../outils/helpers';
-import RoomList from './RoomList';
+import {verifietoken,deleteUser} from '../../outils/helpers';
+import UserList from './UserList';
 
 
 
 
 
-const DeleteOption = () => {
+const DeleteUser = () => {
 
     const history = useHistory();
     const params = useParams();
     useEffect(()=> {
         if(verifietoken()){
-            deleteRoom(params.id)
-            alert("la chambre est bien supprimé")
-            history.push("/room-list");
+            deleteUser(params.id)
+            alert("utilisateur est bien supprimé")
+            history.push("/user-list");
         }
         else{
             localStorage.clear()
@@ -24,8 +24,8 @@ const DeleteOption = () => {
         }
     }, [params.id])
     return (
-        <RoomList/>
+        <UserList/>
     );
 };
 
-export default DeleteOption;
+export default DeleteUser;

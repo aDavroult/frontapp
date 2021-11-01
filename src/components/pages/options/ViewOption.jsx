@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react';
 
 import {Button, Col, Container, Form, Image, Row} from "react-bootstrap";
 import axios from 'axios'; 
-import { verifietoken } from '../outils/helpers'
+import { verifietoken } from '../../outils/helpers'
 import { useHistory, useParams, Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/fontawesome-free-solid';

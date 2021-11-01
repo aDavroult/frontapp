@@ -4,8 +4,8 @@ import { Button, Col, Container, Form, Row} from 'react-bootstrap';
 
 import { Link,useHistory} from 'react-router-dom';
 import axios from 'axios'; 
-import MyBookings from '../pages/MyBookings';
-import { getRoles } from '../outils/helpers'
+import MyBookings from '../MyBookings';
+import { getRoles } from '../../outils/helpers'
 
 
 const Login = ({islogin,setIslogin,isadmin,setIsadmin}) => {
@@ -33,8 +33,7 @@ const Login = ({islogin,setIslogin,isadmin,setIsadmin}) => {
             }
             else{
                 history.push("/reserver");
-            }
-                
+            }        
         })
         .catch(err => {
             console.log(err);
