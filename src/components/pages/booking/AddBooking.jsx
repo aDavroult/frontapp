@@ -5,15 +5,16 @@ import {Button, Col, Container, Form, Row, Carousel, Image} from "react-bootstra
 
 import axios from 'axios';
 import { Link,useHistory } from 'react-router-dom';
+import ReactDOM from "react-dom";
 
 import { getPriceOfSelectedRooms,verifietoken,addBooking} from '../../outils/helpers'
 
 const AddBooking = () => {
-    const[sum,setSum] = useState(0);
+
     const[idsForBooking,setIdsForBooking] = useState([]);
     const [dateStart, setDateStart] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [totalPrice, setTotalPrice] = useState(13);
+    const [totalPrice, setTotalPrice] = useState(0);
     const [rooms, setRooms] = useState([]);
     const [type, setType] = useState('simple');
     const [number, setNumber] = useState(1);
@@ -55,15 +56,18 @@ const AddBooking = () => {
 },(Display));
 
 console.log(dateStart,endDate,type,isDisplay)
+const dateStartn = new Date(dateStart).getTime();
+console.log(dateStartn)
+const endDatetn = new Date(endDate).getTime();
+
+console.log(dateStart)
+console.log(endDate.replace(/[/]/g, ['-']))
 
 //get avalaible rooms
-
-
 const handleSubmit = e => {
     e.preventDefault();
-
-if(dateStart && endDate){
-    // check if rooms are available
+    //convert date to timestamp
+if( dateStartn < endDatetn){
     const data = {
         dateStart:dateStart,
         endDate:endDate,
@@ -84,9 +88,11 @@ if(dateStart && endDate){
             
     })
     .catch(err => {
-        // console.log(`api/room/notbooking/${data.dateStart}/${data.endDate}/${data.type}`)
         console.log(err)
     })
+}
+else{
+    alert("la date de fin doit etre superieur à la date de début")
 }
 }
 //select the roomsid from idRooms that user tapped in number and get rooms array like '/api/rooms/1'..
@@ -106,17 +112,11 @@ if(dateStart && endDate){
                 });
                 rooms.push(result.map(item => `/api/rooms/${item}`))
                 setRooms(rooms);
-        // let getPrice = result.map(item => console.log(getPriceOfSelectedRooms(item))) ;
-                console.log(rooms);
-                console.log(rooms[0])
-                console.log(rooms.length)
-                console.log(result.length)
             }
             else
                 if(idRooms.length == 0){
-                    alert(`Veuilez changée la date de réservation et/ou le numero de la chambre souhaiter` )
+                    alert(`Veuilez changée la date de réservation et/ou le type de la chambre souhaiter` )
                     history.push("/reserver");
-                    console.log(getPriceOfSelectedRooms(86));
                 }
                 else {
                     alert(`Veuillez choisir un nombre de chambre inferieur à ${idRooms.length+1} ` )
@@ -142,9 +142,9 @@ if(dateStart && endDate){
                 prices.push(res.data.price)
                 setPrices(prices);
                 console.log(prices); 
-                    setSum(prices.reduce(function(a, b) { return a + b; }, 0)) 
+                    setTotalPrice(prices.reduce(function(a, b) { return a + b; }, 0)) 
                     
-                console.log(sum)
+                console.log(totalPrice)
             })
             .catch(err => {
                 console.log(err)
@@ -152,24 +152,34 @@ if(dateStart && endDate){
             }
             )
     },[idsForBooking])
+
     //add booking
-    console.log("finish",sum);
     useEffect(()=>{
         console.log("finish",prices); 
-        if(sum && prices.length==idsForBooking.length){
-            addBooking(dateStart,endDate,sum,rooms[0],checkedValues)
+        if(totalPrice && prices.length==idsForBooking.length){
+            addBooking(dateStart,endDate,totalPrice,rooms[0],checkedValues)
             alert(`La réservation est bien rajoutée` )
             history.push("/mes-reservations");
         }
-    },[sum])
-    //option checked
+    },[totalPrice])
+
+    //get checked option 
+
+    console.log(checkedValues);
         const handleChecked = e => {
             const optionListNew= optionList[e.target.dataset.id];
             let newCheckedValues = checkedValues.filter(item => item !== optionListNew);
-            if (e.target.checked) newCheckedValues.push(`/api/options/${optionListNew.id}`);
-            setCheckedValues(newCheckedValues);
+            if (e.target.checked){
+                newCheckedValues.push(`/api/options/${optionListNew.id}`);
+                setCheckedValues(newCheckedValues);
+            } 
+            else{
+                var index = checkedValues.indexOf(e.target.value)
+                checkedValues.splice(index, 1); 
+            }
+            console.log(checkedValues)
         };
-        console.log(checkedValues)
+        
     return (
         <>
             <Container className="mb-5 mt-5">
@@ -180,12 +190,12 @@ if(dateStart && endDate){
                             <Row className="mb-3">
                                 <Form.Group as={Col} controlId="formGridEmail">
                                     <Form.Label>Date de début</Form.Label>
-                                    <Form.Control type="text" placeholder="Insérez la date de début - AAAA-MM-JJ" name="dateStart" value={dateStart} onChange={(e) => setDateStart(e.target.value)}/>
+                                    <Form.Control type="text" placeholder="Insérez la date de début - JJ-MM-AAAA" name="dateStart" value={dateStart} onChange={(e) => setDateStart(e.target.value)}/>
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formGridPassword">
                                     <Form.Label>Date de fin</Form.Label>
-                                    <Form.Control type="text" placeholder="Insérez la date de fin - AAAA-MM-JJ" name="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)}/>
+                                    <Form.Control type="text" placeholder="Insérez la date de fin - JJ-MM-AAAA" name="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)}/>
                                 </Form.Group>
                             </Row>
                             <Row className="mb-3">

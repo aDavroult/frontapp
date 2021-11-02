@@ -26,6 +26,7 @@ const Edituser = () => {
             
         }, [params.id])
         //get the roles of user selected 
+        console.log(roles);
         useEffect(()=> {   
             for (var index = 0; roles[index]; index++) {
                 console.log('index:', index, 'valeur:', roles[index]);
