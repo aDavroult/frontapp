@@ -9,8 +9,7 @@ import { Link,useHistory } from 'react-router-dom';
 import { getPriceOfSelectedRooms,verifietoken,addBooking} from '../../outils/helpers'
 
 const AddBooking = () => {
-    const[sum,setSum] = useState(0);
-    const[idsForBooking,setIdsForBooking] = useState([]);
+    let sum;
     const [dateStart, setDateStart] = useState('');
     const [endDate, setEndDate] = useState('');
     const [totalPrice, setTotalPrice] = useState(13);
@@ -89,47 +88,30 @@ if(dateStart && endDate){
     })
 }
 }
-//select the roomsid from idRooms that user tapped in number and get rooms array like '/api/rooms/1'..
+//select the rooms from idRooms that user tapped in number
     useEffect(() => {
-        if (availableRooms){
-            const idRooms = [];
+    if (availableRooms){
+        const idRooms = [];
             availableRooms.map((availableRooms) => (
             idRooms.push(availableRooms.id)
-            ))
+        ))
         //select number element  from idRooms if idRooms.length is grether than number 
-            if(idRooms.length >= number){
-                const array_rand = require('array_rand');
-                const result = array_rand.getRandomObjectsInRangeSync(idRooms, number, 0, idRooms.length-1);
-                array_rand.getRandomObjectsInRange(idRooms, number, 0, idRooms.length-1, function(err, result) {
-                console.log(result);
-                setIdsForBooking(result);
-                });
-                rooms.push(result.map(item => `/api/rooms/${item}`))
-                setRooms(rooms);
+        if(idRooms.length >= number){
+        const array_rand = require('array_rand');
+        const result = array_rand.getRandomObjectsInRangeSync(idRooms, number, 0, idRooms.length-1);
+        array_rand.getRandomObjectsInRange(idRooms, number, 0, idRooms.length-1, function(err, result) {
+        console.log(result);
+        });
+        rooms.push(result.map(item => `/api/rooms/${item}`))
+        setRooms(rooms);
         // let getPrice = result.map(item => console.log(getPriceOfSelectedRooms(item))) ;
-                console.log(rooms);
-                console.log(rooms[0])
-                console.log(rooms.length)
-                console.log(result.length)
-            }
-            else
-                if(idRooms.length == 0){
-                    alert(`Veuilez changée la date de réservation et/ou le numero de la chambre souhaiter` )
-                    history.push("/reserver");
-                    console.log(getPriceOfSelectedRooms(86));
-                }
-                else {
-                    alert(`Veuillez choisir un nombre de chambre inferieur à ${idRooms.length+1} ` )
-                    history.push("/reserver");
-                }
-        }
-    },[availableRooms]);
-
-    ////calcul totalPrice/////
+        console.log(rooms);
+        console.log(rooms[0])
+        console.log(rooms.length)
+        console.log(result)
+        ////getPrice/////
     
-    useEffect(()=>{
-        idsForBooking.map(item=>{
-            
+            result.map(item=>{
             axios({
                 method: "get",
                 url: `api/rooms/${item}`,
@@ -141,35 +123,49 @@ if(dateStart && endDate){
                 console.log(res.data.price)
                 prices.push(res.data.price)
                 setPrices(prices);
-                console.log(prices); 
-                    setSum(prices.reduce(function(a, b) { return a + b; }, 0)) 
-                    
-                console.log(sum)
+                console.log(prices);
+                sum = prices.reduce(function(a, b) { return a + b; }, 0)
+                console.log("sums", sum)
+                
+                
+            
             })
             .catch(err => {
                 console.log(err)
             })
-            }
-            )
-    },[idsForBooking])
-    //add booking
-    console.log("finish",sum);
-    useEffect(()=>{
-        console.log("finish",prices); 
-        if(sum && prices.length==idsForBooking.length){
-            addBooking(dateStart,endDate,sum,rooms[0],checkedValues)
+            })
+        console.log(sum);
+        console.log("finish", sum)//0
+        ////////add booking/////
+        
+            addBooking(dateStart,endDate,sum= 13,rooms[0],checkedValues)
             alert(`La réservation est bien rajoutée` )
             history.push("/mes-reservations");
+        /////////////
+    }
+    else{
+        if(idRooms.length == 0){
+            alert(`Veuilez changée la date de réservation et/ou le numero de la chambre souhaiter` )
+            history.push("/reserver");
+            console.log(getPriceOfSelectedRooms(86));
         }
-    },[sum])
-    //option checked
+        else {
+            alert(`Veuillez choisir un nombre de chambre inferieur à ${idRooms.length+1} ` )
+            history.push("/reserver");
+
+        }
+        
+    }   
+    }
+},[availableRooms]);
+
         const handleChecked = e => {
-            const optionListNew= optionList[e.target.dataset.id];
-            let newCheckedValues = checkedValues.filter(item => item !== optionListNew);
-            if (e.target.checked) newCheckedValues.push(`/api/options/${optionListNew.id}`);
-            setCheckedValues(newCheckedValues);
+        const optionListNew= optionList[e.target.dataset.id];
+        let newCheckedValues = checkedValues.filter(item => item !== optionListNew);
+        if (e.target.checked) newCheckedValues.push(`/api/options/${optionListNew.id}`);
+        setCheckedValues(newCheckedValues);
         };
-        console.log(checkedValues)
+    console.log(checkedValues)
     return (
         <>
             <Container className="mb-5 mt-5">

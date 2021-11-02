@@ -274,12 +274,13 @@ export function getPriceOfSelectedRooms(id){
 
 }
               ////////add booking/////
-export function addBooking(dateStart,endDate,totalPrice,rooms){
+export function addBooking(dateStart,endDate,totalPrice,rooms,options){
         const data = {
         dateStart:dateStart,
         endDate:endDate,
         totalPrice:totalPrice,
-        rooms:rooms
+        rooms:rooms,
+        options:options
     }
     axios({
         method: "post",
