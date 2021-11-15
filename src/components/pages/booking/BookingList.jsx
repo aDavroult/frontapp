@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { faEdit,faTrash,faEye } from '@fortawesome/fontawesome-free-solid';
 
-
 import axios from 'axios'; 
 import { Link } from 'react-router-dom';
 import {getUserForBooking} from '../../outils/helpers';
