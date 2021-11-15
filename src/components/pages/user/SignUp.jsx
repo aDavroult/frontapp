@@ -27,7 +27,7 @@ const SignUp = () => {
         } else {
         const data = {
             email:email,
-            password:password,
+            plainPassword:password,
             firstName:firstName,
             lastName:lastName,
             phone:phone

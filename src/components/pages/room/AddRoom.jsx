@@ -4,7 +4,7 @@ import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {useHistory} from 'react-router-dom';
 
 import axios from 'axios'; 
-import { verifietoken } from '../outils/helpers'
+import { verifietoken } from '../../outils/helpers'
 
 
 

@@ -1,29 +1,24 @@
 import React, { useState, useEffect} from 'react';
 
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
-import {useHistory} from 'react-router-dom';
-
-import axios from 'axios'; 
-import {verifietoken,editRoom,getRoom} from '../outils/helpers';
+import {useHistory} from 'react-router-dom'; 
+import {verifietoken,editOption,getOption} from '../../outils/helpers';
 import { useParams, Link } from "react-router-dom";
 
 
 
 
 
-const EditRoom = () => {
+const EditOption = () => {
 
     const params = useParams();
-    const [posts, setPosts] = useState([])
-    const [imageFile,setImageFile] = useState(null);
-    const [number,setNumber] = useState();
-    const [type,setType] = useState();
+    const [name,setName] = useState();
     const [price,setPrice] = useState();
     const history = useHistory();
     
         useEffect(()=> {
             //get the room to disply it in the form befor edit it
-                getRoom(params.id,setPosts,setNumber,setType,setPrice,setImageFile)
+                getOption(params.id,setName,setPrice)
             //edit room
             
         }, [params.id])
@@ -31,9 +26,9 @@ const EditRoom = () => {
     const handleSubmit = e => {
         if(verifietoken()){
         e.preventDefault();
-        editRoom(params.id,number,type,price,imageFile)
-        alert("la chambre a été modifiée")
-        history.push("/room-list");
+        editOption(params.id,name,price)
+        alert("l'option' a été modifiée")
+        history.push("/option-list");
         }
         else{
             localStorage.clear()
@@ -45,31 +40,16 @@ const EditRoom = () => {
         <>
             <Container className="mb-5">
                 <Row className="mt-5 form-box offset-md-3 col-md-6">
-                    <h1 className="mt-5 text-center blue">Modifier la chambre {posts.id}</h1>
+                    <h1 className="mt-5 text-center blue">Modifier  {name}</h1>
                     <Col className="p-5 m-auto rounded-lg">
                         <Form onSubmit={handleSubmit}>
-                            <Form.Group controlId="imageFile" className="mb-3">
-                                <Form.Label>Photos de la chambre</Form.Label>
-                                <Form.Control type="file" onChange={event =>setImageFile(event.target.files[0])} />
-                            </Form.Group>
-                            <Form.Group controlId="number" className="mb-3">
-                                <Form.Label>Numéro de la chambre *</Form.Label>
-                                <Form.Control type="number" placeholder="Insérez le numéro de la chambre" onChange={e => setNumber(parseInt(e.target.value))} value={number} required/>
+                            <Form.Group controlId="name" className="mb-3">
+                                <Form.Label>Nom *</Form.Label>
+                                <Form.Control type="name" placeholder="Insérez le nom de l'option" onChange={e => setName(e.target.value)} value={name} required/>
                                 <Form.Text className="text-muted">
                                     Ce champ est obligatoire.
                                 </Form.Text>
                             </Form.Group>
-                            <Form.Group as={Col} controlId="type" className="mb-3">
-                                <Form.Label>Type de chambre *</Form.Label>
-                                <Form.Select aria-label="Type de chambre" onChange={e => setType(e.target.value)} value={type} required >
-                                    <option value="simple">Simple</option>
-                                    <option value="double">Double</option>
-                                </Form.Select>
-                                <Form.Text className="text-muted">
-                                    Ce champ est obligatoire.
-                                </Form.Text>
-                            </Form.Group>
-
                             <Form.Group controlId="price" className="mb-3">
                                 <Form.Label>Prix de la chambre *</Form.Label>
                                 <Form.Control type="number" placeholder="Insérez le prix de la chambre" onChange={e => setPrice(parseFloat(e.target.value))} value={price} required/>
@@ -77,7 +57,6 @@ const EditRoom = () => {
                                     Ce champ est obligatoire.
                                 </Form.Text>
                             </Form.Group>
-
                             <Row className="mt-5">
                                 <Col md={6} className="text-center mb-3">
                                     <Button variant="dark btn-block" type="submit">
@@ -98,4 +77,4 @@ const EditRoom = () => {
     );
 };
 
-export default EditRoom;
+export default EditOption;
