@@ -54,7 +54,7 @@ const ViewRoom = () => {
                     <Col className="p-5 m-auto rounded-lg">
                         <Row>
                             <Col className="col-md-12 text-center">
-                                {imageUrl &&(<Image src={"https://apphot.herokuapp.com/" + imageUrl}  alt="image room" width="100%"></Image>)}
+                                {imageUrl &&(<Image src={"http://127.0.0.1:8000/" + imageUrl}  alt="image room" width="100%"></Image>)}
                             </Col>
                             <Col className="col-md-12 text-center">
                                 Numéro : {number}
