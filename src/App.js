@@ -13,7 +13,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavbarHotel/>
-      <Footer/>
+      <Footer/> 
     </BrowserRouter>
   );
 }

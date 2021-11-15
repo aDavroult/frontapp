@@ -1,6 +1,4 @@
 import React from "react";
-import logo from '../../images/logo-royal.png'
-
 import {
   Box,
   Container,
@@ -8,18 +6,16 @@ import {
   Column,
   FooterLink,
   Heading,
-  
 } from "./footerStyles";
-import { Image } from 'react-bootstrap';
   
 const Footer = () => {
   return (
     <Box>
-      <a href="/">
-      <div   className="logofooter">
-        <Image  src={logo} width="1px" hight="1px" alt="image room" className="logo"></Image>
-      </div>
-      </a>
+      <h1 style={{ color: "#2C2B3D", 
+                    textAlign: "center", 
+                    marginTop: "-30px" }}>
+        appHOTEL
+      </h1>
       <Container>
         <Row>
           <Column>

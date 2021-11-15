@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: #2C2B3D;
+  background-color: #f7f7f7 ;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -21,8 +21,32 @@ body {
 /* NAVBAR */
 
 .navbar {
-  background-color: #FEB613;
+  background-color: #5A384F;
+  font-family: 'PT Sans Narrow',Arial,sans-serif;
+  color: #e2e2e2 !important;
 }
+.dropdown-item {
+  background-color: #5c182f;
+  
+
+}
+.dropdown-item :hover{
+  color: #5c182f!important;
+  text-decoration: initial;
+}
+.dropdown-item :active{
+  color:  #5c182f!important;
+  text-decoration: initial;
+}
+.dropdown-item :focus{
+  color:  #5c182f!important;
+  text-decoration: initial;
+}
+.navbar:hover {
+  
+  text-decoration-color:black!important;
+}
+
 
 /* ACCUEIL */
 
@@ -37,13 +61,46 @@ body {
 /* LOGIN PAGE */
 
 .form-box {
-  background-color: #FEB613;
+  background-color: #e2e2e2;
 }
 
 .white {
-  color: #fff!important;
+  color: #e2e2e2!important;
+}
+.cancel {
+  background-color: grey !important;
+  border: solid grey;
 }
 
 .blue {
-  color:#2C2B3D!important;
+  color:#271f1f!important;
 }
+
+.ewqlqQ {
+  background: #5c182f!important;
+  bottom: 0;
+  width: 100%;
+}
+button{
+  background-color:#5A384F!important ;
+}
+.logo{
+  height:50px;
+  width:100px ;
+}
+.logofooter{
+  justify-content: center!important ;
+  text-align: center;
+  
+  
+}
+button#input-group-dropdown-1 {
+  color: white!important;
+}
+.tomato{
+  color: black;
+}
+
+
+
+

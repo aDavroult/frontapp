@@ -13,8 +13,10 @@ const DeleteOption = () => {
     const params = useParams();
     useEffect(()=> {
         if(verifietoken()){
+            if (window.confirm('Vous voulez vraiment supprimer option?')) {
             deleteOption(params.id)
             alert("l'option est bien supprimé'")
+            }
             history.push("/option-list");
         }
         else{

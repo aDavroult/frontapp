@@ -13,8 +13,10 @@ const DeleteRoom = () => {
     const params = useParams();
     useEffect(()=> {
         if(verifietoken()){
+            if (window.confirm('Vous voulez vraiment supprimer la chambre?')) {
             deleteRoom(params.id)
             alert("la chambre est bien supprimé")
+            }
             history.push("/room-list");
         }
         else{

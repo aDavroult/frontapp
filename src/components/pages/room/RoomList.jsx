@@ -54,7 +54,7 @@ const RoomList = () => {
                                     <td>{roomsList.price}€</td>
                                     <td><Link to={"/room-view/"+ roomsList.id}><FontAwesomeIcon icon={faEye}/></Link></td>
                                     <td><Link to={"/room-edit/"+ roomsList.id}><FontAwesomeIcon icon={faEdit} /></Link></td>
-                                    <td><Link to={"/room-delete/"+ roomsList.id}><FontAwesomeIcon icon={faTrash} color="Tomato" /></Link></td>
+                                    <td><Link to={"/room-delete/"+ roomsList.id}><FontAwesomeIcon icon={faTrash} className="tomato" /></Link></td>
                                 </tr>
                             ))}
                         </tbody>

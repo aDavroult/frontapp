@@ -29,6 +29,16 @@ export function verifietoken(){
         return true
     }
 }
+//get the id of user connected
+export function getCurrentUser(){
+      // get the token
+    const token = localStorage.getItem('token');
+  //decoded the token
+    const decoded = jwt_decode(token);
+    console.log(decoded.id);
+    return decoded.id
+
+}
 //to get the Role from token
 export function getRoles(){
     // get the token
@@ -130,6 +140,27 @@ export function deleteRoom(id){
     })
 
 }
+//get all room
+export function getAllRoom(){
+    
+    axios({
+        method: "get",
+        url: `api/rooms`,
+        headers: {  
+            'Authorization':'Bearer '+ localStorage.getItem("token")
+        }
+    })
+    .then(res => {
+    
+        console.log(res)
+    
+    })
+    .catch(err =>{
+        console.log(err)
+    })
+
+
+}
 //delete option 
 export function deleteOption(id){
     axios({
@@ -205,14 +236,17 @@ export function getUser(id,setEmail,setRoles){
     .then(res => {
         console.log(res)
         setEmail(res.data.email)
-        setRoles(res.data.roles)       
+        setRoles(res.data.roles)   
+    //   setFirstName(res.data.firstName)       
     })
     .catch(err =>{
         console.log(err)
     })
 
+
 return  {setEmail,setRoles}
 }
+
 //edit user
 export function editUser(id,email,roles){
 
@@ -294,7 +328,55 @@ export function addBooking(dateStart,endDate,totalPrice,rooms,options){
         console.log(response);
     })
 }
-          /////////////
+//delete booking
+
+//delete room
+export function deleteBooking(id){
+    axios({
+        method: "delete",
+        url: `api/bookings/${id}`,
+        headers: {  
+            'Authorization':'Bearer '+ localStorage.getItem("token")
+        }
+    })
+    .then(res => {
+        console.log(res)
+    })
+    .catch(err =>{
+        console.log(err)
+    })
+
+}
+//get user from booking
+//get user
+export function getUserForBooking(url, setFirstName, setLastName){
+    
+    axios({
+        method: "get",
+        url: url,
+        headers: {  
+            'Authorization':'Bearer '+ localStorage.getItem("token")
+        }
+    })
+    .then(res => {
+        console.log(res.totalPrice)  
+
+        setFirstName(res.data.totalPrice)    
+        setLastName(res.data.lastName)       
+    })
+    .catch(err =>{
+        console.log(err)
+    })
+
+
+return  {setFirstName,setLastName}
+}
+
+
+
+
+
+
 
 
 

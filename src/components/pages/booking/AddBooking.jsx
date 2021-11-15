@@ -7,7 +7,10 @@ import axios from 'axios';
 import { Link,useHistory } from 'react-router-dom';
 import ReactDOM from "react-dom";
 
-import { getPriceOfSelectedRooms,verifietoken,addBooking} from '../../outils/helpers'
+import { getPriceOfSelectedRooms, verifietoken, addBooking, getAllRoom} from '../../outils/helpers'
+import parking from '../../../images/parking.jpg'
+import petitDej from '../../../images/petitDej.jpg'
+import piscine from '../../../images/piscine.jpg'
 
 const AddBooking = () => {
 
@@ -20,16 +23,51 @@ const AddBooking = () => {
     const [number, setNumber] = useState(1);
     const [prices, setPrices] = useState([]);
     const [options, setOptions] = useState([]);
-
     const [availableRooms, setAvailableRooms] = useState(null);
+    const [allRooms, setAllRooms] = useState([]);
     const [isDisplay, setIsDisplay] = useState(true);
+    const [isDisplayImage, setIsDisplayImage] = useState(true);
     const [Display, setDisplay] = useState(true);
+    const [displayRooms, setDisplayRooms] = useState(true);
 
     const [optionList, setOptionList] = useState([]);
     const [checkedValues, setCheckedValues] = useState([]);
-
-    
+    const [allImageurl, setAllImageUrl] = useState([]);
     const history = useHistory();
+    
+//get all rooms
+useEffect(()=>{
+    if(verifietoken()){
+        
+        axios({
+            method: "get",
+            url: "api/rooms",
+            headers: {  
+                'Authorization':'Bearer '+ localStorage.getItem("token")
+            }
+        })
+        .then((response) => {
+            console.log(response);
+            const allRooms = response.data;
+            setAllRooms(allRooms);
+            //get image of all rooms
+            allRooms.map(allRooms => {
+                allImageurl.push(allRooms.imageUrl)
+                setAllImageUrl(allImageurl)
+                console.log(allImageurl)
+                
+            })
+            setDisplayRooms(false)
+        })
+    }
+    else{
+        localStorage.clear()
+        alert("Votre session est expirer")
+        history.push("/login");
+    }
+},(displayRooms));
+console.log(allRooms.length)
+console.log(allImageurl)
     //get Option
     useEffect(() => {
     if(verifietoken()){
@@ -67,7 +105,7 @@ console.log(endDate.replace(/[/]/g, ['-']))
 const handleSubmit = e => {
     e.preventDefault();
     //convert date to timestamp
-if( dateStartn < endDatetn){
+if( dateStart && endDate){
     const data = {
         dateStart:dateStart,
         endDate:endDate,
@@ -183,6 +221,7 @@ else{
     return (
         <>
             <Container className="mb-5 mt-5">
+            
                 <Row>
                     <Col className="col-md-6 form-box">
                         <h1 className="mt-5 mb-2 text-center blue">Réservez !</h1>
@@ -229,6 +268,7 @@ else{
                                     </Col>
                                 ))}
                             </Row>
+                
                             <Row className="mt-5">
                                 <Col className="offset-md-3 col-md-6 text-center mb-3">
                                     <Button variant="dark btn-block" type="submit" className="white" >
@@ -240,43 +280,30 @@ else{
                     </Col>
                     <Col className="offset-md-1 col-md-5 form-box">
                         <Row>
+                        
                             <Carousel className="mt-3">
-                                <Carousel.Item >
-                                <img
-                                    className="d-block w-100 hero"
-                                    src="default-image.png"
-                                    alt="First slide"
-                                />
-                                </Carousel.Item>
-                                <Carousel.Item >
-                                <img
-                                    className="d-block w-100 hero"
-                                    src="default-image.png"
-                                    alt="Second slide"
-                                />
-                                </Carousel.Item>
-                                <Carousel.Item >
-                                <img
-                                    className="d-block w-100 hero"
-                                    src="default-image.png"
-                                    alt="Third slide"
-                                />
-                                </Carousel.Item>
+                                {allImageurl.map(allImageurl =>(
+                                    <Carousel.Item >
+                                        <Image src={"https://apphot.herokuapp.com" + allImageurl} hight="100%" alt="image room" className="d-block w-100 hero"></Image>
+                                    </Carousel.Item>
+                                )) }
                             </Carousel>
+                            
                         </Row>
                         <Row className="mt-3 mb-3 text-center">
                             <Col className="col-md-4">
-                                <Image src="default-placeholder.png" width="100%"/>
+                                <Image src={parking} width="100%"/>
                             </Col>
                             <Col className="col-md-4">
-                                <Image src="default-placeholder.png" width="100%"/>
+                                <Image src={petitDej} width="100%"/>
                             </Col>
                             <Col className="col-md-4">
-                                <Image src="default-placeholder.png" width="100%"/>
+                                <Image src={piscine} width="100%"/>
                             </Col>
                         </Row>
                     </Col>
                 </Row>
+                
             </Container>
         </>
     );
