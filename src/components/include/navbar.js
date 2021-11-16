@@ -153,7 +153,7 @@ function  logout(){
                 <SignUp/>
               </Route>
               {islogin &&(
-              <Route path='/payment/:totalPrice' component={Payment} />
+              <Route path='/payment' component={Payment} />
               )}
               <Route path='/room-edit/:id' component={EditRoom} />
               <Route path='/room-view/:id' component={ViewRoom} />
