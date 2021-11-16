@@ -108,6 +108,7 @@ console.log(canDelete)
                             </Button>
                         )}
                         </Col>
+                        <hr />
                     </Row>
                     )))}
 

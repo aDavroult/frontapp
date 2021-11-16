@@ -67,9 +67,16 @@ body {
 .white {
   color: #e2e2e2!important;
 }
+
 .cancel {
-  background-color: grey !important;
-  border: solid grey;
+  margin-left: 10px;
+  color: #5A384F!important;
+  background-color: #e2e2e2 !important;
+  border: 1px solid #5A384F;
+}
+
+.cancel:hover {
+  border: 1px solid #5A384F;
 }
 
 .blue {
@@ -101,6 +108,18 @@ button#input-group-dropdown-1 {
   color: black;
 }
 
+.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0; 
+}
 
+.dropdown-item.active, .dropdown-item:active {
+  color: #fff!important;
+  text-decoration: none;
+  background: #5c182f!important;
+}
 
-
+.dropdown-item :active {
+  color: #fff!important;
+  text-decoration: initial;
+}
