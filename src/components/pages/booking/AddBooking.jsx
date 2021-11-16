@@ -194,16 +194,6 @@ else{
             )
     },[idsForBooking])
 
-   /*  //add booking */
-   /*  useEffect(()=>{ */
-   /*      console.log("finish",prices);  */
-   /*      if(totalPrice && prices.length==idsForBooking.length){ */
-   /*          addBooking(dateStart,endDate,totalPrice,rooms[0],checkedValues) */
-   /*          alert(`La réservation est bien rajoutée` ) */
-   /*          history.push("/mes-reservations"); */
-   /*      } */
-   /*  },[totalPrice]) */
-
     //get checked option 
 
     console.log(checkedValues);
@@ -234,9 +224,8 @@ else{
         }
         if(totalPrice && prices.length==idsForBooking.length){
             console.log(totalPrice)
-            history.push("/payment/"+data);
-            console.log("data",data);
-            addBooking(dateStart,endDate,totalPrice,rooms[0],checkedValues)
+            history.push("/payment",data)
+        
         }
     },[totalPrice])
 

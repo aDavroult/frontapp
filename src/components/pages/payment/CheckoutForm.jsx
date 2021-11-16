@@ -1,12 +1,16 @@
 import {useStripe, useElements, PaymentElement, CardElement} from '@stripe/react-stripe-js';
 import {element} from 'prop-types';
-import {payment} from '../../outils/helpers'
+import {payment,addBooking} from '../../outils/helpers'
 
-export const CheckoutForm = ({data,roomstobdd}) => {
+export const CheckoutForm = ({data}) => {
     const stripe = useStripe();
     const elements = useElements();
-    console.log(roomstobdd)
-    console.log("dataincheckoform",data)
+    
+    const dateStart = data.dateStart
+    const endDate = data.endDate
+    const totalPrice = data.totalPrice*100
+    const roomstobdd = data.roomstobdd
+    const checkedValues = data.checkedValues
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -17,8 +21,8 @@ export const CheckoutForm = ({data,roomstobdd}) => {
         if(!error){
             console.log("Token généré: ", paymentMethod);
             console.log(paymentMethod.id)
-            payment(paymentMethod.id, 100)
-           // addBooking(dateStart,endDate,totalPrice,roomstobdd,checkedValues)
+            payment(paymentMethod.id, totalPrice)
+            addBooking(dateStart,endDate,totalPrice,roomstobdd,checkedValues)
 
         }
     }
