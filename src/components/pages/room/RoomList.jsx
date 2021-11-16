@@ -34,7 +34,7 @@ const RoomList = () => {
             <Container className="mb-5">
                 <Row className="mt-5 form-box offset-md-1 col-md-10 p-3">
                     <h1 className="mt-5 mb-5 text-center blue">Liste des chambres</h1>
-                    <Table responsive="md" className="text-center">
+                    <Table responsive="md" className="text-center table-striped">
                         <thead>
                         <tr>
                             <th>Numéro de la chambre</th>
@@ -55,6 +55,7 @@ const RoomList = () => {
                                     <td><Link to={"/room-view/"+ roomsList.id}><FontAwesomeIcon icon={faEye}/></Link></td>
                                     <td><Link to={"/room-edit/"+ roomsList.id}><FontAwesomeIcon icon={faEdit} /></Link></td>
                                     <td><Link to={"/room-delete/"+ roomsList.id}><FontAwesomeIcon icon={faTrash} className="tomato" /></Link></td>
+                                    
                                 </tr>
                             ))}
                         </tbody>

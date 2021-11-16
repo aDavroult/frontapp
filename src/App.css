@@ -104,8 +104,9 @@ button{
 button#input-group-dropdown-1 {
   color: white!important;
 }
+
 .tomato{
-  color: black;
+  color: #dc3545!important;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -122,4 +123,46 @@ button#input-group-dropdown-1 {
 .dropdown-item :active {
   color: #fff!important;
   text-decoration: initial;
+}
+
+/* FOOTER */
+
+.footer-links {
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.footer-links li {
+  display: inline-block;
+}
+
+.footer-legal li.divider, .footer-links li.divider {
+  color: #d1d1d1;
+  padding: 0 8 px;
+}
+
+.footer-legal {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 20px;
+  clear: both;
+}
+
+.footer-legal.top {
+  max-width: 550px;
+  padding-top: 60px;
+  border-top: 1px solid #e6e6e6;
+}
+
+.footer-legal li {
+  display: inline-block;
+}
+
+.footer-legal li, .footer-legal a {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #898989;
 }
