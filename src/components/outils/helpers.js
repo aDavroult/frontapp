@@ -371,6 +371,48 @@ export function getUserForBooking(url, setFirstName, setLastName){
 
 return  {setFirstName,setLastName}
 }
+//add booking
+/* export function addBookingf(){ */
+/*      //add booking */
+/*  useEffect(()=>{ */
+/*     console.log("finish",prices);  */
+/*     if(totalPrice && prices.length==idsForBooking.length){ */
+/*         addBooking(dateStart,endDate,totalPrice,rooms[0],checkedValues) */
+/*         alert(`La réservation est bien rajoutée` ) */
+/*         history.push("/mes-reservations"); */
+/*     } */
+/* },[totalPrice]) */
+/* } */
+/*  */
+//payement
+export function payment(token,totalPrice){
+    
+    axios({
+        method: "post",
+        url: `booking/payment/${token}/${totalPrice}`,
+        
+    })
+    .then(res => {
+        console.log(res)   
+    })
+    .catch(err =>{
+        console.log(err)
+    })
+
+
+return  true
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
