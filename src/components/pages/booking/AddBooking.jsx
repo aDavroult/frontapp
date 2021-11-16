@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Link,useHistory } from 'react-router-dom';
 import ReactDOM from "react-dom";
 
-import { getPriceOfSelectedRooms, verifietoken, addBooking, getAllRoom} from '../../outils/helpers'
+import { getPriceOfSelectedRooms, verifietoken, addBooking, getAllRoom,payment} from '../../outils/helpers'
 import parking from '../../../images/parking.jpg'
 import petitDej from '../../../images/petitDej.jpg'
 import piscine from '../../../images/piscine.jpg'
@@ -35,6 +35,7 @@ const AddBooking = () => {
     const [checkedValues, setCheckedValues] = useState([]);
     const [allImageurl, setAllImageUrl] = useState([]);
     const history = useHistory();
+    
     
 //get all rooms
 useEffect(()=>{
@@ -133,6 +134,7 @@ if( dateStart && endDate){
 else{
     alert("la date de fin doit etre superieur à la date de début")
 }
+
 }
 //select the roomsid from idRooms that user tapped in number and get rooms array like '/api/rooms/1'..
     useEffect(() => {
@@ -192,15 +194,15 @@ else{
             )
     },[idsForBooking])
 
-    //add booking
-    useEffect(()=>{
-        console.log("finish",prices); 
-        if(totalPrice && prices.length==idsForBooking.length){
-            addBooking(dateStart,endDate,totalPrice,rooms[0],checkedValues)
-            alert(`La réservation est bien rajoutée` )
-            history.push("/mes-reservations");
-        }
-    },[totalPrice])
+   /*  //add booking */
+   /*  useEffect(()=>{ */
+   /*      console.log("finish",prices);  */
+   /*      if(totalPrice && prices.length==idsForBooking.length){ */
+   /*          addBooking(dateStart,endDate,totalPrice,rooms[0],checkedValues) */
+   /*          alert(`La réservation est bien rajoutée` ) */
+   /*          history.push("/mes-reservations"); */
+   /*      } */
+   /*  },[totalPrice]) */
 
     //get checked option 
 
@@ -218,7 +220,27 @@ else{
             }
             console.log(checkedValues)
         };
-        
+    //go to payment page
+    useEffect(()=>{
+
+        console.log("finish",prices); 
+        const roomsbooking =rooms[0]
+        const data={
+            dateStart:dateStart,
+            endDate:endDate,
+            totalPrice:totalPrice,
+            roomsbooking :roomsbooking,
+            checkedValues :checkedValues
+        }
+        if(totalPrice && prices.length==idsForBooking.length){
+            console.log(totalPrice)
+            history.push("/payment/"+data);
+            console.log("data",data);
+            addBooking(dateStart,endDate,totalPrice,rooms[0],checkedValues)
+        }
+    },[totalPrice])
+
+    
     return (
         <>
             <Container className="mb-5 mt-5">
@@ -304,7 +326,6 @@ else{
                         </Row>
                     </Col>
                 </Row>
-                <Payment />
             </Container>
         </>
     );

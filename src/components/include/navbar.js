@@ -33,6 +33,7 @@ import DeleteBooking from '../pages/booking/DeleteBooking';
 import ViewBooking from '../pages/booking/ViewBooking';
 import ViewMyBooking from '../pages/booking/ViewMyBooking ';
 import DeleteMyBooking from '../pages/booking/DeleteMyBooking';
+import Payment from '../pages/payment/Payment';
 import logo from '../../images/logo-royal.png'
 
 
@@ -151,6 +152,9 @@ function  logout(){
               <Route path="/signup">
                 <SignUp/>
               </Route>
+              {islogin &&(
+              <Route path='/payment/:totalPrice' component={Payment} />
+              )}
               <Route path='/room-edit/:id' component={EditRoom} />
               <Route path='/room-view/:id' component={ViewRoom} />
               <Route path='/room-delete/:id' component={DeleteRoom} />
