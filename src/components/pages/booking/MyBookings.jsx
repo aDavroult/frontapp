@@ -44,8 +44,8 @@ const MyBookings = () => {
     //to get days between the date start and register
     console.log("bookingsList",bookingsList)
     useEffect(()=>{
-       if(bookingsList){
-         bookingsList.map(bookingsList=>{
+        if(bookingsList){
+        bookingsList.map(bookingsList=>{
             let diff = {}
             let  date1 = new Date(bookingsList.createdAt);
             let date2 = new Date(bookingsList.dateStart);                                
@@ -58,7 +58,7 @@ const MyBookings = () => {
             diff.hour = tmp % 24;                   
             tmp = Math.floor((tmp-diff.hour)/24);   
             diff.day = tmp;
-              if(diff.day > 1){
+            if(diff.day > 1){
                 canDelete.push(true) 
                 setCanDelete(canDelete)
             }
