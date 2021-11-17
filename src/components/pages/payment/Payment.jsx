@@ -15,7 +15,6 @@ export default function Payment(props) {
 const params = useParams();
 //get the data from AddBooking componenet
 const data = props.location.state
-
   return (
     <Elements stripe={stripeTestPromise}>
       <CheckoutForm data={data}  />
