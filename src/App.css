@@ -170,3 +170,9 @@ button#input-group-dropdown-1 {
 .purple {
   color:#5A384F!important;
 }
+
+.btn:hover {
+  background-color:#d7b761!important;
+  border:1px solid #5A384F!important;
+  color:#5A384F!important;
+}

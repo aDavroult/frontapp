@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 import {Button, Col, Container, Form, Row, Carousel, Image} from "react-bootstrap";
 
+
 import axios from 'axios';
 import { Link,useHistory } from 'react-router-dom';
 import ReactDOM from "react-dom";
@@ -12,6 +13,7 @@ import petitDej from '../../../images/petitDej.jpg'
 import piscine from '../../../images/piscine.jpg'
 
 import Payment from '../payment/Payment';
+
 
 const AddBooking = () => {
 
