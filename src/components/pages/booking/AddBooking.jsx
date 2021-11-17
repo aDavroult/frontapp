@@ -154,7 +154,7 @@ else{
             }
             else
                 if(idRooms.length == 0){
-                    alert(`Veuilez changée la date de réservation et/ou le type de la chambre souhaiter` )
+                    alert(`Veuilez changer la date de réservation et/ou le type de la chambre souhaiter` )
                     history.push("/reserver");
                 }
                 else {
@@ -285,7 +285,7 @@ else{
                             <Carousel className="mt-3">
                                 {allImageurl.map(allImageurl =>(
                                     <Carousel.Item >
-                                        <Image src={"https://apphot.herokuapp.com" + allImageurl} hight="100%" alt="image room" className="d-block w-100 hero"></Image>
+                                        <Image src={"https://apphot.herokuapp.com" + allImageurl} height="300px" alt="image room" className="d-block w-100 hero"></Image>
                                     </Carousel.Item>
                                 )) }
                             </Carousel>
