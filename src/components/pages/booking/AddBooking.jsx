@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Link,useHistory } from 'react-router-dom';
 import ReactDOM from "react-dom";
 
-import { verifietoken,getpriceOfSelectedOption} from '../../outils/helpers'
+import { verifietoken} from '../../outils/helpers'
 import parking from '../../../images/parking.jpg'
 import petitDej from '../../../images/petitDej.jpg'
 import piscine from '../../../images/piscine.jpg'
@@ -38,7 +38,9 @@ const AddBooking = () => {
     const [totalPriceOption, setTotalPriceOption] = useState(0);
     const history = useHistory();
     
-    const now = (new Date()).toLocaleDateString();
+    const now = new Date();
+    const nowc = now.getFullYear()+'-'+(now.getMonth()+1)+ '-'+now.getDate()
+    console.log("nowwwwwwwwwwww",now.getFullYear()+'-'+(now.getMonth()+1)+ '-'+now.getDate())
 
 //get all rooms
 useEffect(()=>{
@@ -52,15 +54,12 @@ useEffect(()=>{
             }
         })
         .then((response) => {
-            console.log(response);
             const allRooms = response.data;
             setAllRooms(allRooms);
             //get image of all rooms
             allRooms.map(allRooms => {
                 allImageurl.push(allRooms.imageUrl)
                 setAllImageUrl(allImageurl)
-                console.log(allImageurl)
-                
             })
             setDisplayRooms(false)
         })
@@ -71,8 +70,6 @@ useEffect(()=>{
         history.push("/login");
     }
 },(displayRooms));
-console.log(allRooms.length)
-console.log(allImageurl)
     //get Option
     useEffect(() => {
     if(verifietoken()){
@@ -85,7 +82,6 @@ console.log(allImageurl)
             }
         })
         .then((response) => {
-            console.log(response);
             const availableOptions = response.data;
             setOptionList(availableOptions);
             setDisplay(false)
@@ -98,31 +94,25 @@ console.log(allImageurl)
     }
 },(Display));
 
-
-
-dateStart.replace(/[/]/g, ['-'])
-endDate.replace(/[/]/g, ['-'])
-console.log(dateStart.replace(/[/]/g, ['-']),endDate.replace(/[/]/g, ['-']))
-
 //get avalaible rooms
 const handleSubmit = e => {
     e.preventDefault();
-    //convert date to timestamp
-console.log("now",now)
-console.log("dateStart",dateStart ) 
+//const nowc = now.replace(/[/]/g, ['-'])
+/* console.log("date debut",(new Date(dateStart))) */
+/* console.log("date de fin",new Date (endDate)) */
+/* console.log("date debut avec number",Number(new Date(new Date(dateStart)))) */
+/* console.log("date de fin avec number",Number(new Date(new Date (endDate)))) */
+/* console.log("comparaison des date",Number(new Date(new Date(dateStart)))< Number(new Date(new Date (endDate)))) */
+/* console.log(new Date().getTime()) */
+/* console.log(new Date(dateStart).getTime(),new Date(endDate).getTime(),new Date(nowc).getTime()) */
+/*  */
 
- console.log(dateStart < endDate ) ;
- console.log(dateStart >= now ) ; 
- console.log(endDate > now) ;  
-
-const nowc = now.replace(/[/]/g, ['-'])
-if((dateStart < endDate) && (dateStart >= nowc)&& (endDate > nowc)){
+if((dateStart < endDate)){
     const data = {
         dateStart:dateStart,
         endDate:endDate,
         type:type,
     }
-    console.log(data)
     axios({
         method: "get",
         url: `api/room/notbooking/${data.dateStart}/${data.endDate}/${data.type}`,
@@ -132,8 +122,7 @@ if((dateStart < endDate) && (dateStart >= nowc)&& (endDate > nowc)){
         }
     })
     .then(res => {
-        console.log(res.data)
-            setAvailableRooms(res.data);    
+        setAvailableRooms(res.data);    
     })
     .catch(err => {
         console.log(err)
@@ -157,7 +146,6 @@ else{
                 const array_rand = require('array_rand');
                 const result = array_rand.getRandomObjectsInRangeSync(idRooms, number, 0, idRooms.length-1);
                 array_rand.getRandomObjectsInRange(idRooms, number, 0, idRooms.length-1, function(err, result) {
-                console.log(result);
                 setIdsForBooking(result);
                 });
                 rooms.push(result.map(item => `/api/rooms/${item}`))
@@ -188,13 +176,9 @@ else{
                 }
             })
             .then(res => {
-                console.log(res.data.price)
                 prices.push(res.data.price)
-                setPrices(prices);
-                console.log(prices); 
-                    setTotalPrice(prices.reduce(function(a, b) { return a + b; }, 0)) 
-                    
-                console.log(totalPrice)
+                setPrices(prices); 
+                setTotalPrice(prices.reduce(function(a, b) { return a + b; }, 0)) 
             })
             .catch(err => {
                 console.log(err)
@@ -202,8 +186,6 @@ else{
             }
             )
     },[idsForBooking])  
-
-    console.log(checkedValues);
 
     //get checked option 
     
@@ -218,15 +200,12 @@ else{
                 var index = checkedValues.indexOf(e.target.value)
                 checkedValues.splice(index, 1); 
             }
-            console.log(checkedValues)
         };
     
 
     //go to payment page
 
-    useEffect(()=>{
-    
-        console.log("finish",prices); 
+    useEffect(()=>{ 
         const roomsbooking =rooms[0]
         const data={
             dateStart:dateStart,
@@ -237,13 +216,10 @@ else{
             
         }
         if(totalPrice && prices.length==idsForBooking.length){
-            console.log(totalPrice)
             history.push("/payment",data)
-        
         }
     },[totalPrice])
 
-    
     return (
         <>
             <Container className="mb-5 mt-5">
@@ -255,12 +231,12 @@ else{
                             <Row className="mb-3">
                                 <Form.Group as={Col} controlId="formGridEmail">
                                     <Form.Label>Date de début</Form.Label>
-                                    <Form.Control type="text" placeholder="Insérez la date de début - JJ-MM-AAAA" name="dateStart" value={dateStart} onChange={(e) => setDateStart(e.target.value)}/>
+                                    <Form.Control min={nowc} type="date" placeholder="Insérez la date de début - JJ-MM-AAAA" name="dateStart" value={dateStart} onChange={(e) => setDateStart(e.target.value)} required/>
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formGridPassword">
                                     <Form.Label>Date de fin</Form.Label>
-                                    <Form.Control type="text" placeholder="Insérez la date de fin - JJ-MM-AAAA" name="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)}/>
+                                    <Form.Control min={dateStart} type="date" placeholder="Insérez la date de fin - JJ-MM-AAAA" name="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)} required/>
                                 </Form.Group>
                             </Row>
                             <Row className="mb-3">
