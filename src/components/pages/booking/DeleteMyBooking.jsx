@@ -3,10 +3,6 @@ import {useHistory,useParams} from 'react-router-dom';
 import {verifietoken,deleteBooking} from '../../outils/helpers';
 import MyBookings from './MyBookings';
 
-
-
-
-
 const DeleteMyBooking = () => {
 
     const history = useHistory();
@@ -15,17 +11,16 @@ const DeleteMyBooking = () => {
         if(verifietoken()){
             if (window.confirm('Vous voulez vraiment annuler la réservation?')) {
                 deleteBooking(params.id)
-                alert("la réservation est annulé")
- 
+                alert("la réservation est annulée")
             } else {
-            console.log('Thing was not deleted to the database.');
+                console.log('Thing was not deleted to the database.');
             }
            
             history.push("/mes-reservations");
         }
         else{
             localStorage.clear()
-            alert("Votre session est expirer")
+            alert("Votre session a expirée")
             history.push("/login");
         }
     }, [params.id])

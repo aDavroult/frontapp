@@ -5,11 +5,6 @@ import {useHistory} from 'react-router-dom';
 import {verifietoken,editUser,getUser} from '../../outils/helpers';
 import { useParams, Link } from "react-router-dom";
 
-
-
-
-
-
 const Edituser = () => {
 
     const params = useParams();
@@ -22,8 +17,6 @@ const Edituser = () => {
         useEffect(()=> {
             //get the room to disply it in the form befor edit it
                 getUser(params.id,setEmail,setRoles)
-            
-            
         }, [params.id])
         //get the roles of user selected 
         console.log(roles);
