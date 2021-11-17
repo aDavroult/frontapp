@@ -328,9 +328,11 @@ export function deleteUser(id){
     })
     .then(res => {
         console.log(res)
+        alert("utilisateur est bien supprimé")
     })
     .catch(err =>{
         console.log(err)
+        alert("vous ne pouvez pas le supprimé car il a des réservations")
     })
 
 }

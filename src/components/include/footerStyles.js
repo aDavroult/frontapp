@@ -1,18 +1,17 @@
 import styled from 'styled-components';
-   
+
 export const Box = styled.div`
   padding: 50px 40px;
-  background: #f7f7f7;
+  background: white;
   bottom: 0;
   width: 100%;
   color: grey!important;
-  border-top: 2px solid #5A384F!important;
-   
+
   @media (max-width: 1000px) {
     padding: 70px 30px;
   }
 `;
-   
+
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -20,7 +19,7 @@ export const Container = styled.div`
     max-width: 1000px;
     margin: 0 auto;
 `
-   
+
 export const Column = styled.div`
   display: flex;
   flex-direction: column;

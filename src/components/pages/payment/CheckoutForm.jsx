@@ -6,7 +6,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 
-export const CheckoutForm = ({data}) => {
+export const CheckoutForm = ({data,finalPrice,setFinalPrice}) => {
     const stripe = useStripe();
     const elements = useElements();
     const[pricesOption,setPricesOption]=useState([]);
@@ -44,8 +44,8 @@ export const CheckoutForm = ({data}) => {
     
     console.log("totalPriceOption",totalPriceOption) 
     console.log("totalprice",totalPrice)   
-    const final = totalPriceOption+totalPrice
-    console.log("finallll",final)
+    setFinalPrice(totalPriceOption+totalPrice)
+    console.log("finallll",finalPrice)
     const handleSubmit = async (event) => {
         event.preventDefault();
         const {error, paymentMethod} = await stripe.createPaymentMethod({
@@ -54,8 +54,8 @@ export const CheckoutForm = ({data}) => {
         }) 
         if(!error){
             console.log("Token généré: ", paymentMethod);
-            payment(paymentMethod.id, final*100)
-            addBooking(dateStart,endDate,final,roomsbooking,checkedValues)
+            payment(paymentMethod.id, finalPrice*100)
+            addBooking(dateStart,endDate,finalPrice,roomsbooking,checkedValues)
             alert("payement réussi")
 
         }

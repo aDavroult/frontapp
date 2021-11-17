@@ -15,7 +15,6 @@ const DeleteUser = () => {
         if(verifietoken()){
             if (window.confirm('Vous voulez vraiment supprimer l`utilisateur?')) {
             deleteUser(params.id)
-            alert("utilisateur est bien supprimé")
             }
             history.push("/user-list");
         }
