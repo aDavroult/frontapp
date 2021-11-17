@@ -41,7 +41,7 @@ return (
                                     <Card.Text>
                                         {roomsList.type}
                                     </Card.Text>
-                                    <Button className="text-center white" variant="dark">Voir</Button>
+                                    <Link to={"/room-view/"+ roomsList.id} className="text-center white" variant="dark"><Button >Voir</Button></Link>
                                 </Card.Body>
                             </Card>
                         </Col>

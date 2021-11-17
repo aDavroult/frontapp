@@ -116,7 +116,9 @@ console.log("dateStart",dateStart )
  console.log(endDate > now) ;  
 
 const nowc = now.replace(/[/]/g, ['-'])
-if((dateStart < endDate) && (dateStart >= nowc)&& (endDate > nowc)){
+if((dateStart < endDate)) {
+// && (dateStart >= nowc)&& (endDate > nowc))
+
     const data = {
         dateStart:dateStart,
         endDate:endDate,

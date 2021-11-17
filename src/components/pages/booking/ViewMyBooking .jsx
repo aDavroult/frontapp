@@ -20,7 +20,6 @@ const ViewMyBooking = () => {
     const [isDisplay, setIsDisplay] = useState(true);
     const [Display, setDisplay] = useState(true);
     
-    
     const history = useHistory();
         useEffect(()=> {
             if(verifietoken()){

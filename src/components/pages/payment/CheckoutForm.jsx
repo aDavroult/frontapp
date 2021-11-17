@@ -1,7 +1,6 @@
-import {useStripe, useElements, PaymentElement, CardElement} from '@stripe/react-stripe-js';
-import {element} from 'prop-types';
+import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 import {payment,addBooking} from '../../outils/helpers'
-import {Button, Col, Container, Form, Row, Carousel, Image} from "react-bootstrap";
+import {Container} from "react-bootstrap";
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
@@ -9,8 +8,8 @@ import axios from 'axios';
 export const CheckoutForm = ({data,finalPrice,setFinalPrice}) => {
     const stripe = useStripe();
     const elements = useElements();
-    const[pricesOption,setPricesOption]=useState([]);
-    const [totalPriceOption, setTotalPriceOption] = useState();
+    const [pricesOption,setPricesOption] = useState([]);
+    const [totalPriceOption, setTotalPriceOption] = useState(0);
     const [isDisplay, setisDisplay] = useState(true);
     
     const dateStart = data.dateStart
@@ -56,25 +55,24 @@ export const CheckoutForm = ({data,finalPrice,setFinalPrice}) => {
             console.log("Token généré: ", paymentMethod);
             payment(paymentMethod.id, finalPrice*100)
             addBooking(dateStart,endDate,finalPrice,roomsbooking,checkedValues)
-            alert("payement réussi")
-
+            alert("Paiement réussi")
         }
         else{
-            alert("payement pas réussi")
+            alert("Le paiement à échoué, merci de réessayer.")
         }
     }
         return (
-            <>
-            <Container className="mb-5 mt-5">
-            <form onSubmit={handleSubmit}>
-                <CardElement
-                    options={{
-                        hidePostalCode: true
-                    }}
-                />
-                <button class="btn btn-secondary mt-2">Paiement</button>
-            </form>
-            </Container>
-            </>
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <CardElement
+                        options={{
+                            hidePostalCode: true
+                        }}
+                    />
+                    <Container className="mt-3 text-center">
+                        <button class="white btn btn-dark btn-block mt-2">Paiement</button>   
+                    </Container>             
+                </form>
+            </div>
         )
 }
