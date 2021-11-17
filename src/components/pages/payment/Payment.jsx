@@ -17,8 +17,16 @@ const params = useParams();
 const data = props.location.state
 
   return (
-    <Elements stripe={stripeTestPromise}>
-      <CheckoutForm data={data}  />
-    </Elements>
+    <div class="m-2">
+      <h1>Paiement</h1>
+      <Elements stripe={stripeTestPromise}>
+        <CheckoutForm data={data}  />
+      </Elements>
+
+      <h2>Récapitulatif de votre commande</h2>
+      <p>Réservation du {data.dateStart} au {data.endDate}</p>
+      <p>Montant total : {data.totalPrice} €</p>
+    </div>
+
   );
 };
