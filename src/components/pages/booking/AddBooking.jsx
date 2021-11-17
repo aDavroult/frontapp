@@ -123,29 +123,6 @@ if( dateStart < endDate){
     .then(res => {
         console.log(res.data)
             setAvailableRooms(res.data);    
-            //////////////////////////////////////
-           /*  if(checkedValues){ */
-           /*      checkedValues.map((item)=>{ */
-           /*         axios({ */
-           /*             method: "get", */
-           /*             url: item, */
-           /*         }) */
-           /*         .then(res => {   */
-           /*              */
-           /*             pricesOption.push(res.data.price)  */
-           /*             setPricesOption( pricesOption) */
-           /*             console.log("ligne418",pricesOption) */
-           /*             const reducer = (previousValue, currentValue) => previousValue + currentValue; */
-           /*             console.log("here",pricesOption.reduce(reducer)) */
-           /*             setTotalPriceOption(pricesOption.reduce(reducer)) */
-           /*             console.log("iciiiiiiiiiiiiii232", totalPriceOption)    */
-           /*         }) */
-           /*         .catch(err =>{ */
-           /*             console.log(err) */
-           /*         }) */
-           /*     }) */
-           /*  } */
-            /////////////////////////////////////////////
     })
     .catch(err => {
         console.log(err)
@@ -232,41 +209,13 @@ else{
             console.log(checkedValues)
         };
     
-     ////get total price option//////////////////////
-/*      useEffect(()=>{ */
-/*         if(checkedValues){ */
-/*      checkedValues.map((item)=>{ */
-/*         axios({ */
-/*             method: "get", */
-/*             url: item, */
-/*         }) */
-/*         .then(res => {   */
-/*              */
-/*             pricesOption.push(res.data.price)  */
-/*             setPricesOption( pricesOption) */
-/*             console.log("ligne418",pricesOption) */
-/*             const reducer = (previousValue, currentValue) => previousValue + currentValue; */
-/*             console.log("here",pricesOption.reduce(reducer)) */
-/*             setTotalPriceOption(pricesOption.reduce(reducer)) */
-/*             console.log("iciiiiiiiiiiiiii232", totalPriceOption)    */
-/*         }) */
-/*         .catch(err =>{ */
-/*             console.log(err) */
-/*         }) */
-/*     }) */
-/* } */
-/* console.log("iciiiiiiiiiiiiii233", totalPriceOption)    */
-/* },[checkedValues]) */
 
     //go to payment page
 
     useEffect(()=>{
-     //   const finalPrice = totalPrice + totalPriceOption
-
+    
         console.log("finish",prices); 
         const roomsbooking =rooms[0]
-        
-        
         const data={
             dateStart:dateStart,
             endDate:endDate,
