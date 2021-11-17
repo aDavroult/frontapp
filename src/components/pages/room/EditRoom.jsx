@@ -49,7 +49,7 @@ const EditRoom = () => {
                             <Form.Group controlId="imageFile" className="mb-3">
                                 <Form.Label>Photos de la chambre</Form.Label>
                                 <Form.Control type="file" onChange={event =>setImageFile(event.target.files[0])} />
-                                {imageUrl &&(<Image src={"http://127.0.0.1:8000/" + imageUrl}  alt="image room" width="100%"></Image>)}
+                                {imageUrl &&(<Image src={axios.defaults.baseURL + imageUrl}  alt="image room" width="100%"></Image>)}
                             </Form.Group>
                             <Form.Group controlId="number" className="mb-3">
                                 <Form.Label>Numéro de la chambre *</Form.Label>

@@ -17,7 +17,7 @@ const ViewRoom = () => {
     const [type,setType] = useState();
     const [price,setPrice] = useState();
     const history = useHistory();
-    
+    console.log("axios.defaults.baseURL",axios.defaults.baseURL)
         useEffect(()=> {
             if(verifietoken()){
             axios({
@@ -54,7 +54,7 @@ const ViewRoom = () => {
                     <Col className="p-5 m-auto rounded-lg">
                         <Row>
                             <Col className="col-md-12 text-center">
-                                {imageUrl &&(<Image src={"http://127.0.0.1:8000/" + imageUrl}  alt="image room" width="100%"></Image>)}
+                                {imageUrl &&(<Image src={axios.defaults.baseURL + imageUrl}  alt="image room" width="100%"></Image>)}
                             </Col>
                             <Col className="col-md-12 text-center">
                                 Numéro : {number}

@@ -6,12 +6,11 @@ import axios from 'axios';
 import { Link,useHistory } from 'react-router-dom';
 import ReactDOM from "react-dom";
 
-import { getPriceOfSelectedRooms, verifietoken, addBooking, getAllRoom,payment} from '../../outils/helpers'
+import { verifietoken,getpriceOfSelectedOption} from '../../outils/helpers'
 import parking from '../../../images/parking.jpg'
 import petitDej from '../../../images/petitDej.jpg'
 import piscine from '../../../images/piscine.jpg'
 
-import Payment from '../payment/Payment';
 
 const AddBooking = () => {
 
@@ -30,13 +29,14 @@ const AddBooking = () => {
     const [isDisplayImage, setIsDisplayImage] = useState(true);
     const [Display, setDisplay] = useState(true);
     const [displayRooms, setDisplayRooms] = useState(true);
-
     const [optionList, setOptionList] = useState([]);
     const [checkedValues, setCheckedValues] = useState([]);
     const [allImageurl, setAllImageUrl] = useState([]);
+    const[pricesOption,setPricesOption]=useState([]);
+    const [totalPriceOption, setTotalPriceOption] = useState(0);
     const history = useHistory();
     
-    
+
 //get all rooms
 useEffect(()=>{
     if(verifietoken()){
@@ -95,19 +95,17 @@ console.log(allImageurl)
     }
 },(Display));
 
-console.log(dateStart,endDate,type,isDisplay)
-const dateStartn = new Date(dateStart).getTime();
-console.log(dateStartn)
-const endDatetn = new Date(endDate).getTime();
 
-console.log(dateStart)
-console.log(endDate.replace(/[/]/g, ['-']))
+
+dateStart.replace(/[/]/g, ['-'])
+endDate.replace(/[/]/g, ['-'])
+console.log(dateStart.replace(/[/]/g, ['-']),endDate.replace(/[/]/g, ['-']))
 
 //get avalaible rooms
 const handleSubmit = e => {
     e.preventDefault();
     //convert date to timestamp
-if( dateStart && endDate){
+if( dateStart < endDate){
     const data = {
         dateStart:dateStart,
         endDate:endDate,
@@ -124,18 +122,40 @@ if( dateStart && endDate){
     })
     .then(res => {
         console.log(res.data)
-            setAvailableRooms(res.data);
-            
+            setAvailableRooms(res.data);    
+            //////////////////////////////////////
+           /*  if(checkedValues){ */
+           /*      checkedValues.map((item)=>{ */
+           /*         axios({ */
+           /*             method: "get", */
+           /*             url: item, */
+           /*         }) */
+           /*         .then(res => {   */
+           /*              */
+           /*             pricesOption.push(res.data.price)  */
+           /*             setPricesOption( pricesOption) */
+           /*             console.log("ligne418",pricesOption) */
+           /*             const reducer = (previousValue, currentValue) => previousValue + currentValue; */
+           /*             console.log("here",pricesOption.reduce(reducer)) */
+           /*             setTotalPriceOption(pricesOption.reduce(reducer)) */
+           /*             console.log("iciiiiiiiiiiiiii232", totalPriceOption)    */
+           /*         }) */
+           /*         .catch(err =>{ */
+           /*             console.log(err) */
+           /*         }) */
+           /*     }) */
+           /*  } */
+            /////////////////////////////////////////////
     })
     .catch(err => {
         console.log(err)
     })
 }
 else{
-    alert("la date de fin doit etre superieur à la date de début")
+    alert("la date de fin doit être superieure à la date de début")
+}
 }
 
-}
 //select the roomsid from idRooms that user tapped in number and get rooms array like '/api/rooms/1'..
     useEffect(() => {
         if (availableRooms){
@@ -192,11 +212,12 @@ else{
             })
             }
             )
-    },[idsForBooking])
-
-    //get checked option 
+    },[idsForBooking])  
 
     console.log(checkedValues);
+
+    //get checked option 
+    
         const handleChecked = e => {
             const optionListNew= optionList[e.target.dataset.id];
             let newCheckedValues = checkedValues.filter(item => item !== optionListNew);
@@ -210,17 +231,49 @@ else{
             }
             console.log(checkedValues)
         };
+    
+     ////get total price option//////////////////////
+/*      useEffect(()=>{ */
+/*         if(checkedValues){ */
+/*      checkedValues.map((item)=>{ */
+/*         axios({ */
+/*             method: "get", */
+/*             url: item, */
+/*         }) */
+/*         .then(res => {   */
+/*              */
+/*             pricesOption.push(res.data.price)  */
+/*             setPricesOption( pricesOption) */
+/*             console.log("ligne418",pricesOption) */
+/*             const reducer = (previousValue, currentValue) => previousValue + currentValue; */
+/*             console.log("here",pricesOption.reduce(reducer)) */
+/*             setTotalPriceOption(pricesOption.reduce(reducer)) */
+/*             console.log("iciiiiiiiiiiiiii232", totalPriceOption)    */
+/*         }) */
+/*         .catch(err =>{ */
+/*             console.log(err) */
+/*         }) */
+/*     }) */
+/* } */
+/* console.log("iciiiiiiiiiiiiii233", totalPriceOption)    */
+/* },[checkedValues]) */
+
     //go to payment page
+
     useEffect(()=>{
+     //   const finalPrice = totalPrice + totalPriceOption
 
         console.log("finish",prices); 
         const roomsbooking =rooms[0]
+        
+        
         const data={
             dateStart:dateStart,
             endDate:endDate,
             totalPrice:totalPrice,
             roomsbooking :roomsbooking,
-            checkedValues :checkedValues
+            checkedValues :checkedValues,
+            
         }
         if(totalPrice && prices.length==idsForBooking.length){
             console.log(totalPrice)
@@ -296,7 +349,7 @@ else{
                             <Carousel className="mt-3">
                                 {allImageurl.map(allImageurl =>(
                                     <Carousel.Item >
-                                        <Image src={"https://apphot.herokuapp.com" + allImageurl} hight="100%" alt="image room" className="d-block w-100 hero"></Image>
+                                        <Image src={axios.defaults.baseURL + allImageurl} hight="100%" alt="image room" className="d-block w-100 hero"></Image>
                                     </Carousel.Item>
                                 )) }
                             </Carousel>
