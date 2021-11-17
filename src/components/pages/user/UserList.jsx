@@ -51,7 +51,7 @@ const UserList = () => {
                                     <td>{usersList.email}</td>
                                     <td>{JSON.stringify(usersList.roles)}</td>
                                     <td><Link to={"/user-edit/"+ usersList.id}><FontAwesomeIcon icon={faEdit} /></Link></td>
-                                    <td><Link to={"/user-delete/"+ usersList.id}><FontAwesomeIcon icon={faTrash} color="Tomato" /></Link></td>
+                                    <td><Link to={"/user-delete/"+ usersList.id}><FontAwesomeIcon icon={faTrash} className="tomato" /></Link></td>
                                 </tr>
                             ))}
                         </tbody>

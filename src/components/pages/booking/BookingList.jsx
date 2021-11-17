@@ -58,8 +58,8 @@ const BookingList = () => {
                                     <td>{new Date(bookingsList.dateStart).getDate()+ '/'+(new Date(bookingsList.dateStart).getMonth()+1)+'/'+new Date(bookingsList.dateStart).getFullYear()}</td>
                                     <td>{new Date(bookingsList.endDate).getDate()+ '/'+(new Date(bookingsList.endDate).getMonth()+1)+'/'+new Date(bookingsList.endDate).getFullYear()}</td>
                                     <td>{bookingsList.totalPrice}</td>
-                                    <td><Link to={"/booking-view/"+ bookingsList.id}><FontAwesomeIcon icon={faEye} color="Tomato" /></Link></td>
-                                    <td><Link to={"/booking-delete/"+ bookingsList.id}><FontAwesomeIcon icon={faTrash} color="Tomato" /></Link></td>
+                                    <td><Link to={"/booking-view/"+ bookingsList.id}><FontAwesomeIcon icon={faEye} /></Link></td>
+                                    <td><Link to={"/booking-delete/"+ bookingsList.id}><FontAwesomeIcon icon={faTrash} className="tomato" /></Link></td>
                                 </tr>
                             ))
                         )}

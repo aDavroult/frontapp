@@ -52,7 +52,7 @@ const OptionList = () => {
                                     <td>{optionsList.name}</td>
                                     <td>{optionsList.price}€</td>
                                     <td><Link to={"/option-edit/"+ optionsList.id}><FontAwesomeIcon icon={faEdit} /></Link></td>
-                                    <td><Link to={"/option-delete/"+ optionsList.id}><FontAwesomeIcon icon={faTrash} color="Tomato" /></Link></td>
+                                    <td><Link to={"/option-delete/"+ optionsList.id}><FontAwesomeIcon icon={faTrash} className="tomato" /></Link></td>
                                 </tr>
                             ))}
                         </tbody>

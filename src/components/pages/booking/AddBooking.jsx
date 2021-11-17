@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 import {Button, Col, Container, Form, Row, Carousel, Image} from "react-bootstrap";
 
+
 import axios from 'axios';
 import { Link,useHistory } from 'react-router-dom';
 import ReactDOM from "react-dom";
@@ -10,6 +11,7 @@ import { verifietoken,getpriceOfSelectedOption} from '../../outils/helpers'
 import parking from '../../../images/parking.jpg'
 import petitDej from '../../../images/petitDej.jpg'
 import piscine from '../../../images/piscine.jpg'
+
 
 
 const AddBooking = () => {
@@ -163,7 +165,7 @@ else{
             }
             else
                 if(idRooms.length == 0){
-                    alert(`Veuilez changée la date de réservation et/ou le type de la chambre souhaiter` )
+                    alert(`Veuilez changer la date de réservation et/ou le type de la chambre souhaiter` )
                     history.push("/reserver");
                 }
                 else {

@@ -80,7 +80,7 @@ console.log(canDelete)
             <Container className="mb-5">
             
                 <Row className="mt-5 form-box offset-md-1 col-md-10 p-3">
-                    <h1 className="mt-5 mb-5 text-center blue">Mes reservations</h1>
+                    <h1 className="mt-5 mb-5 text-center purple">Mes reservations</h1>
                     {(bookingsList.map((bookingsList,id) => (
                     <Row>
                         <Col md={3}>
@@ -106,6 +106,7 @@ console.log(canDelete)
                             </Button>
                         )}
                         </Col>
+                        <hr />
                     </Row>
                     )))}
 

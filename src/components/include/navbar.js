@@ -34,7 +34,9 @@ import DeleteBooking from '../pages/booking/DeleteBooking';
 import ViewBooking from '../pages/booking/ViewBooking';
 import ViewMyBooking from '../pages/booking/ViewMyBooking ';
 import DeleteMyBooking from '../pages/booking/DeleteMyBooking';
+import GridRoom from '../pages/GridRoom';
 import Payment from '../pages/payment/Payment';
+
 import logo from '../../images/logo-royal.png'
 
 
@@ -57,17 +59,21 @@ function  logout(){
                 <Navbar.Brand href="/"><Image src={logo} width="1px" hight="1px" alt="image room" className="logo"></Image></Navbar.Brand>
                 <Nav className="me-auto">
                   <Nav.Link><Link to="/">Accueil</Link></Nav.Link>
+
+                  <Nav.Link><Link to="/our-rooms">Nos chambres</Link></Nav.Link>
+                  
                   <Nav.Link>
                   {islogin &&(
                     <Link to="/reserver">Réserver</Link>
                   )}
                   </Nav.Link>
                   
-                  <Nav.Link><Link to="/contact">Contact</Link></Nav.Link>
-                  
                   {islogin &&(
                   <Nav.Link><Link to="/mes-reservations">Mes réservations</Link></Nav.Link>
                   )}
+                  
+                  <Nav.Link><Link to="/contact">Contact</Link></Nav.Link>
+                  
                   {isadmin &&(
                   <DropdownButton
                     variant="outline-secondary"
@@ -108,6 +114,9 @@ function  logout(){
             <Switch>
               <Route exact path="/">
                 <Home/>
+              </Route>
+              <Route path="/our-rooms">
+                <GridRoom/>
               </Route>
               {islogin &&(
               <Route path="/reserver">
