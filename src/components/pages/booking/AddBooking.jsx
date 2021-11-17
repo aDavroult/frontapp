@@ -36,6 +36,7 @@ const AddBooking = () => {
     const [totalPriceOption, setTotalPriceOption] = useState(0);
     const history = useHistory();
     
+    const now = (new Date()).toLocaleDateString();
 
 //get all rooms
 useEffect(()=>{
@@ -105,7 +106,15 @@ console.log(dateStart.replace(/[/]/g, ['-']),endDate.replace(/[/]/g, ['-']))
 const handleSubmit = e => {
     e.preventDefault();
     //convert date to timestamp
-if( dateStart < endDate){
+console.log("now",now)
+console.log("dateStart",dateStart ) 
+
+ console.log(dateStart < endDate ) ;
+ console.log(dateStart >= now ) ; 
+ console.log(endDate > now) ;  
+
+const nowc = now.replace(/[/]/g, ['-'])
+if((dateStart < endDate) && (dateStart >= nowc)&& (endDate > nowc)){
     const data = {
         dateStart:dateStart,
         endDate:endDate,
@@ -128,8 +137,9 @@ if( dateStart < endDate){
         console.log(err)
     })
 }
+
 else{
-    alert("la date de fin doit être superieure à la date de début")
+    alert("Veuillez vérifier les dates")
 }
 }
 

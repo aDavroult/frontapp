@@ -56,7 +56,11 @@ export const CheckoutForm = ({data}) => {
             console.log("Token généré: ", paymentMethod);
             payment(paymentMethod.id, final*100)
             addBooking(dateStart,endDate,final,roomsbooking,checkedValues)
+            alert("payement réussi")
 
+        }
+        else{
+            alert("payement pas réussi")
         }
     }
         return (
