@@ -65,11 +65,12 @@ function  logout(){
                   )}
                   </Nav.Link>
                   
-                  <Nav.Link><Link to="/contact">Contact</Link></Nav.Link>
-                  
                   {islogin &&(
                   <Nav.Link><Link to="/mes-reservations">Mes réservations</Link></Nav.Link>
                   )}
+                  
+                  <Nav.Link><Link to="/contact">Contact</Link></Nav.Link>
+                  
                   {isadmin &&(
                   <DropdownButton
                     variant="outline-secondary"
