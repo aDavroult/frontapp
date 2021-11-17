@@ -31,11 +31,11 @@ export function verifietoken(){
 }
 //get the id of user connected
 export function getCurrentUser(){
-      // get the token
+    // get the token
     const token = localStorage.getItem('token');
-  //decoded the token
+    //decoded the token
     const decoded = jwt_decode(token);
-    console.log(decoded.id);
+    // console.log(decoded.id);
     return decoded.id
 
 }
@@ -236,23 +236,45 @@ export function getUser(id,setEmail,setRoles){
     .then(res => {
         console.log(res)
         setEmail(res.data.email)
-        setRoles(res.data.roles)   
-    //   setFirstName(res.data.firstName)       
+        setRoles(res.data.roles)        
     })
     .catch(err =>{
         console.log(err)
     })
 
-
-return  {setEmail,setRoles}
+    return  {setEmail,setRoles}
 }
 
-//edit user
+//get userData
+export function getUserData(id,setEmail,setFirstName,setLastName,setPhone){
+    
+    axios({
+        method: "get",
+        url: `api/users/${id}`,
+        headers: {  
+            'Authorization':'Bearer '+ localStorage.getItem("token")
+        }
+    })
+    .then(res => {
+        console.log(res)
+        setEmail(res.data.email)
+        setFirstName(res.data.firstName)
+        setLastName(res.data.lastName)
+        setPhone(res.data.phone)        
+    })
+    .catch(err =>{
+        console.log(err)
+    })
+
+    return  {setEmail,setFirstName,setLastName,setPhone}
+}
+
+//edit user from admin dashboard
 export function editUser(id,email,roles){
 
     const data = {    
         email:email,
-        roles:roles
+        roles:roles,
     }
     axios({
         method: "put",
@@ -266,7 +288,32 @@ export function editUser(id,email,roles){
         console.log(res.data)
     })
     .catch(err => {
-        
+        console.log(err)
+    })   
+}
+
+//edit user's Data from My account section
+export function editUserData(id, email, plainPassword, firstName, lastName, phone){
+
+    const data = {    
+        email:email,
+        plainPassword:plainPassword,
+        firstName:firstName,
+        lastName:lastName,
+        phone:phone
+    }
+    axios({
+        method: "put",
+        url: `api/users/${id}`,
+        data: data,
+        headers: {  
+            'Authorization':'Bearer '+ localStorage.getItem("token") 
+        }
+    })
+    .then(res => {    
+        console.log(res.data)
+    })
+    .catch(err => {
         console.log(err)
     })   
 }
@@ -307,9 +354,9 @@ export function getPriceOfSelectedRooms(id){
     })
 
 }
-              ////////add booking/////
+////////add booking/////
 export function addBooking(dateStart,endDate,totalPrice,rooms,options){
-        const data = {
+    const data = {
         dateStart:dateStart,
         endDate:endDate,
         totalPrice:totalPrice,
@@ -384,13 +431,12 @@ return  {setFirstName,setLastName}
 /* },[totalPrice]) */
 /* } */
 /*  */
-//payement
+//payment
 export function payment(token,totalPrice){
     
     axios({
         method: "post",
         url: `booking/payment/${token}/${totalPrice}`,
-        
     })
     .then(res => {
         console.log(res)   
@@ -399,51 +445,5 @@ export function payment(token,totalPrice){
         console.log(err)
     })
 
-
-return  true
+    return true
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

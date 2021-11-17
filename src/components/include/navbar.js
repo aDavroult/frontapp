@@ -15,6 +15,7 @@ import SignUp from "../pages/user/SignUp";
 import UserList from "../pages/user/UserList";
 import EditUser from "../pages/user/EditUser";
 import DeleteUser from "../pages/user/DeleteUser";
+import UserAccount from '../pages/user/UserAccount';
 import Contact from "../pages/Contact";
 import MyBookings from "../pages/booking/MyBookings";
 import AddBooking from "../pages/booking/AddBooking";
@@ -88,12 +89,16 @@ function  logout(){
                     <Navbar.Text>
                     
                     {islogin ?(
-                      <Link to="/" onClick ={logout}>Déconnexion</Link>
+                      <div>
+                        <Link to="/" onClick ={logout}>Déconnexion</Link>
+                        &nbsp;|
+                        <Link to="/account"> Mon compte</Link>
+                      </div>
                     ):
                     <div>
-                    <Link to="/signup">Inscription</Link>
-                    &nbsp;|
-                    <Link to="/login"> Connexion</Link>
+                      <Link to="/signup">Inscription</Link>
+                      &nbsp;|
+                      <Link to="/login"> Connexion</Link>
                     </div>
                     } 
                     </Navbar.Text>
@@ -163,6 +168,7 @@ function  logout(){
               <Route path='/option-delete/:id' component={DeleteOption} />
               <Route path='/user-edit/:id' component={EditUser} />
               <Route path='/user-delete/:id' component={DeleteUser} />
+              <Route path='/account' component={UserAccount} />
               <Route path='/booking-delete/:id' component={DeleteBooking} />
               <Route path='/booking-view/:id' component={ViewBooking} />
               <Route path='/mybooking-view/:id' component={ViewMyBooking} />

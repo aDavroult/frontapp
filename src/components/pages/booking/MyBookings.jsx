@@ -10,10 +10,9 @@ const MyBookings = () => {
     const history = useHistory();
     const [bookingsList, setBookingsList] = useState([]);
     const [isDisplay, setIsDisplay] = useState(true);
-     const [getcandelete, setGetcandelete] = useState(true);
+    const [getcandelete, setGetcandelete] = useState(true);
     const [canDelete, setCanDelete] = useState([]);
-    const[detediff,setDatediff] = useState([])  ;
-   
+    const [detediff,setDatediff] = useState([]);
    
     //to get the reservation of current user
     useEffect(() => {
@@ -37,7 +36,7 @@ const MyBookings = () => {
         }
         else{
             localStorage.clear()
-            alert("Votre session est expirer")
+            alert("Votre session à expirée")
             history.push("/login");
         }
     },(isDisplay) );
@@ -62,8 +61,8 @@ const MyBookings = () => {
               if(diff.day > 1){
                 canDelete.push(true) 
                 setCanDelete(canDelete)
-             }
-             else{
+            }
+            else{
                 canDelete.push(false) 
                 setCanDelete(canDelete)
             }
@@ -71,9 +70,9 @@ const MyBookings = () => {
             setDatediff(detediff)   
         }) 
        }
-        console.log("diffday",detediff)          
+        console.log("diffday", detediff)          
     }) 
-    console.log("diffday",detediff)
+    console.log("diffday", detediff)
 console.log(canDelete)
     return (
 
@@ -93,7 +92,7 @@ console.log(canDelete)
                             {new Date(bookingsList.endDate).getDate()+ '/'+(new Date(bookingsList.endDate).getMonth()+1)+'/'+new Date(bookingsList.endDate).getFullYear()}
                         </Col>
                         <Col md={3}>
-                            Nombre de chambre :<br />
+                            Nombre de chambre : <br />
                             {bookingsList.rooms.length}
                         </Col>
                         <Col md={3}>
@@ -101,7 +100,6 @@ console.log(canDelete)
                                 <Link to={"/mybooking-view/"+ bookingsList.id}>CONSULTER</Link>
                             </Button>
                         
-
                         {canDelete[id] &&(
                             <Button className="cancel" variant="dark btn-block" >
                                 <Link to={"/mybooking-delete/"+ bookingsList.id}>Annuler</Link>

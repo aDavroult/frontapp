@@ -68,7 +68,7 @@ export const CheckoutForm = ({data}) => {
                         hidePostalCode: true
                     }}
                 />
-                <button>Submit</button>
+                <button class="btn btn-secondary mt-2">Paiement</button>
             </form>
             </Container>
             </>
