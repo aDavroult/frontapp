@@ -1,90 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 
 
-function GridRoom() {
+import axios from 'axios'; 
+import { Link } from 'react-router-dom';
 
-    return (
-        <>
+
+const GridRoom = () => {
+
+    const [roomsList, setRoomsList] = useState([]);
+    const [isDisplay, setIsDisplay] = useState(true);
+    
+    useEffect(() => {
+        axios({
+            method: "get",
+            url: "api/rooms",
+            headers: {  
+                'Authorization':'Bearer '+ localStorage.getItem("token")
+            }
+        })
+        .then((response) => {
+            console.log(response);
+            const availableRooms = response.data;
+            setRoomsList(availableRooms);
+            setIsDisplay(false)
+        })
+    },(isDisplay));
+    
+return (
+    <>
             <Container className="mb-5">
                 <Row className="mt-5 text-center">
                     <h1 className="purple">Liste de nos chambres</h1>
-                    <Col md={3} className="mt-5 mb-5">
-                        <Card >
-                            <Card.Img variant="top" src="https://www.usine-digitale.fr/mediatheque/3/9/8/000493893/hotel-c-o-q-paris.jpg" />
-                            <Card.Body>
-                                <Card.Title>Chambre n°91</Card.Title>
-                                <Card.Text>
-                                DESCRIPTION DE LA CHAMBREEEEEEEEEE
-                                </Card.Text>
-                                <Button className="text-center white" variant="dark">Voir</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col md={3} className="mt-5 mb-5">
-                        <Card >
-                            <Card.Img variant="top" src="https://www.usine-digitale.fr/mediatheque/3/9/8/000493893/hotel-c-o-q-paris.jpg" />
-                            <Card.Body>
-                                <Card.Title>Chambre n°99</Card.Title>
-                                <Card.Text>
-                                DESCRIPTION DE LA CHAMBREEEEEEEEEE
-                                </Card.Text>
-                                <Button className="text-center white" variant="dark">Voir</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col md={3} className="mt-5 mb-5">
-                        <Card >
-                            <Card.Img variant="top" src="https://www.usine-digitale.fr/mediatheque/3/9/8/000493893/hotel-c-o-q-paris.jpg" />
-                            <Card.Body>
-                                <Card.Title>Chambre n°102</Card.Title>
-                                <Card.Text>
-                                DESCRIPTION DE LA CHAMBREEEEEEEEEE
-                                </Card.Text>
-                                <Button className="text-center white" variant="dark">Voir</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col md={3} className="mt-5 mb-5">
-                        <Card >
-                            <Card.Img variant="top" src="https://www.usine-digitale.fr/mediatheque/3/9/8/000493893/hotel-c-o-q-paris.jpg" />
-                            <Card.Body>
-                                <Card.Title>Chambre n°203</Card.Title>
-                                <Card.Text>
-                                DESCRIPTION DE LA CHAMBREEEEEEEEEE
-                                </Card.Text>
-                                <Button className="text-center white" variant="dark">Voir</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col md={3} className="mt-5 mb-5">
-                        <Card >
-                            <Card.Img variant="top" src="https://www.usine-digitale.fr/mediatheque/3/9/8/000493893/hotel-c-o-q-paris.jpg" />
-                            <Card.Body>
-                                <Card.Title>Chambre n°234</Card.Title>
-                                <Card.Text>
-                                DESCRIPTION DE LA CHAMBREEEEEEEEEE
-                                </Card.Text>
-                                <Button className="text-center white" variant="dark">Voir</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col md={3} className="mt-5 mb-5">
-                        <Card >
-                            <Card.Img variant="top" src="https://www.usine-digitale.fr/mediatheque/3/9/8/000493893/hotel-c-o-q-paris.jpg" />
-                            <Card.Body>
-                                <Card.Title>Chambre n°279</Card.Title>
-                                <Card.Text>
-                                DESCRIPTION DE LA CHAMBREEEEEEEEEE
-                                </Card.Text>
-                                <Button className="text-center white" variant="dark">Voir</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+                    {roomsList.map((roomsList) => (
+                        <Col md={3} className="mt-3 mb-5">
+                            <Card >
+                                {roomsList.imageUrl &&(<Card.Img variant="top" src={"https://apphot.herokuapp.com/" + roomsList.imageUrl}  />)}
+                                <Card.Body>
+                                    <Card.Title>Chambre n°{roomsList.number}</Card.Title>
+                                    <Card.Text>
+                                        {roomsList.type}
+                                    </Card.Text>
+                                    <Button className="text-center white" variant="dark">Voir</Button>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
                 </Row>
             </Container>
-        </>
-    )
-}
+        
+    </>
+);
+};
 
 export default GridRoom; 
