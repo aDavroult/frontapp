@@ -15,7 +15,6 @@ export default function Payment(props) {
 const params = useParams();
 //get the data from AddBooking componenet
 const data = props.location.state
-
   return (
     <div class="m-2">
       <h1>Paiement</h1>
