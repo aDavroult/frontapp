@@ -176,3 +176,8 @@ button#input-group-dropdown-1 {
   border:1px solid #5A384F!important;
   color:#5A384F!important;
 }
+
+.important{
+  color: #5A384F!important;
+  font-size: larger;
+}

@@ -20,7 +20,6 @@ const ViewMyBooking = () => {
     const [isDisplay, setIsDisplay] = useState(true);
     const [Display, setDisplay] = useState(true);
     
-    
     const history = useHistory();
         useEffect(()=> {
             if(verifietoken()){
@@ -62,8 +61,8 @@ const ViewMyBooking = () => {
                     })
                     .then(res => {
                         console.log(res.data)
-                    imageRooms.push(res.data.imageUrl)
-                    typeRooms.push(res.data.type)
+                        imageRooms.push(res.data.imageUrl)
+                        typeRooms.push(res.data.type)
                         setTypeRooms(typeRooms)
                         setImageRooms(imageRooms)
                         
