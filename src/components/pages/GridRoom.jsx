@@ -14,10 +14,7 @@ const GridRoom = () => {
     useEffect(() => {
         axios({
             method: "get",
-            url: "api/rooms",
-            headers: {  
-                'Authorization':'Bearer '+ localStorage.getItem("token")
-            }
+            url: "api/rooms"
         })
         .then((response) => {
             console.log(response);
@@ -35,7 +32,7 @@ return (
                     {roomsList.map((roomsList) => (
                         <Col md={3} className="mt-3 mb-5">
                             <Card >
-                                {roomsList.imageUrl &&(<Card.Img variant="top" src={"https://apphot.herokuapp.com/" + roomsList.imageUrl}  />)}
+                                {roomsList.imageUrl &&(<Card.Img variant="top" height="200px"  src={axios.defaults.baseURL + roomsList.imageUrl}  />)}
                                 <Card.Body>
                                     <Card.Title>Chambre n°{roomsList.number}</Card.Title>
                                     <Card.Text>

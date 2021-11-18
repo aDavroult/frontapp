@@ -27,8 +27,8 @@ const Footer = () => {
         <li class="divider">|</li><li><a href="/fr/contact.html" novaref="4259379" data-global="1" novatype="txt" novaint="1">reservation@gardetteparkhotel.com</a></li>
       </ul>
       <ul class="footer-legal top">
-        <li novaref="4259380" novatype="txt" data-global="1">Gardette Park Hotel</li><li class="divider">|</li>
-        <li> <a href="/fr/disclaimer.html">Mentions légales</a></li><li class="divider">|</li>
+        <li novaref="4259380" novatype="txt" data-global="1">Gardette Park Hotel</li><li class="divider"> | </li>
+        <li> <a href="/fr/disclaimer.html">Mentions légales</a></li><li class="divider"> | </li>
         <li> <a href="/fr/privacy-policy.html">Politique de confidentialité</a></li>
       </ul>
     </Box>
