@@ -38,7 +38,7 @@ return (
                                     <Card.Text>
                                         {roomsList.type}
                                     </Card.Text>
-                                    <Link to={"/room-view/"+ roomsList.id} className="text-center white" variant="dark"><Button >Voir</Button></Link>
+                                    <Link to={"/room-gridview/"+ roomsList.id} className="text-center white" variant="dark"><Button >Voir</Button></Link>
                                 </Card.Body>
                             </Card>
                         </Col>

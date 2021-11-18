@@ -38,6 +38,7 @@ import GridRoom from '../pages/GridRoom';
 import Payment from '../pages/payment/Payment';
 
 import logo from '../../images/logo-royal.png'
+import ViewGridRoom from '../pages/ViewGridRoom';
 
 
 
@@ -171,6 +172,7 @@ function  logout(){
               )}
               <Route path='/room-edit/:id' component={EditRoom} />
               <Route path='/room-view/:id' component={ViewRoom} />
+              <Route path='/room-gridview/:id' component={ViewGridRoom} />
               <Route path='/room-delete/:id' component={DeleteRoom} />
               <Route path='/option-edit/:id' component={EditOption} />
               <Route path='/option-view/:id' component={ViewOption} />
