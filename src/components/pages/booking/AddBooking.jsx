@@ -66,7 +66,7 @@ useEffect(()=>{
     }
     else{
         localStorage.clear()
-        alert("Votre session est expirer")
+        alert("Votre session à expirée")
         history.push("/login");
     }
 },(displayRooms));
@@ -97,15 +97,6 @@ useEffect(()=>{
 //get avalaible rooms
 const handleSubmit = e => {
     e.preventDefault();
-//const nowc = now.replace(/[/]/g, ['-'])
-/* console.log("date debut",(new Date(dateStart))) */
-/* console.log("date de fin",new Date (endDate)) */
-/* console.log("date debut avec number",Number(new Date(new Date(dateStart)))) */
-/* console.log("date de fin avec number",Number(new Date(new Date (endDate)))) */
-/* console.log("comparaison des date",Number(new Date(new Date(dateStart)))< Number(new Date(new Date (endDate)))) */
-/* console.log(new Date().getTime()) */
-/* console.log(new Date(dateStart).getTime(),new Date(endDate).getTime(),new Date(nowc).getTime()) */
-/*  */
 
 if((dateStart < endDate)){
     const data = {
@@ -134,7 +125,7 @@ else{
 }
 }
 
-//select the roomsid from idRooms that user tapped in number and get rooms array like '/api/rooms/1'..
+    //select the roomsid from idRooms that user tapped in number and get rooms array like '/api/rooms/1'..
     useEffect(() => {
         if (availableRooms){
             const idRooms = [];
@@ -183,24 +174,23 @@ else{
             .catch(err => {
                 console.log(err)
             })
-            }
-            )
+        })
     },[idsForBooking])  
 
     //get checked option 
     
-        const handleChecked = e => {
-            const optionListNew= optionList[e.target.dataset.id];
-            let newCheckedValues = checkedValues.filter(item => item !== optionListNew);
-            if (e.target.checked){
-                newCheckedValues.push(`/api/options/${optionListNew.id}`);
-                setCheckedValues(newCheckedValues);
-            } 
-            else{
-                var index = checkedValues.indexOf(e.target.value)
-                checkedValues.splice(index, 1); 
-            }
-        };
+    const handleChecked = e => {
+        const optionListNew= optionList[e.target.dataset.id];
+        let newCheckedValues = checkedValues.filter(item => item !== optionListNew);
+        if (e.target.checked){
+            newCheckedValues.push(`/api/options/${optionListNew.id}`);
+            setCheckedValues(newCheckedValues);
+        } 
+        else{
+            var index = checkedValues.indexOf(e.target.value)
+            checkedValues.splice(index, 1); 
+        }
+    };
     
 
     //go to payment page

@@ -15,9 +15,6 @@ const GridRoom = () => {
         axios({
             method: "get",
             url: "api/rooms",
-            headers: {  
-                'Authorization':'Bearer '+ localStorage.getItem("token")
-            }
         })
         .then((response) => {
             console.log(response);

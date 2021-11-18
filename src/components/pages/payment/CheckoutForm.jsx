@@ -43,8 +43,8 @@ export const CheckoutForm = ({data,finalPrice,setFinalPrice}) => {
             
     },(isDisplay))
     
-    console.log("totalPriceOption",totalPriceOption) 
-    console.log("totalprice",totalPrice)  
+    // console.log("totalPriceOption",totalPriceOption) 
+    // console.log("totalprice",totalPrice)  
     setFinalPrice(totalPriceOption+totalPrice)
     console.log("finallll",finalPrice)
     const handleSubmit = async (event) => {
