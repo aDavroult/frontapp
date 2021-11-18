@@ -181,3 +181,42 @@ button#input-group-dropdown-1 {
   color: #5A384F!important;
   font-size: larger;
 }
+
+li {
+  list-style: none;
+  list-style-position: inside;
+}
+
+.social {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.social li {
+  display: inline-block;
+}
+
+.social a {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin: 0 2px;
+  border-radius: 50%;
+  margin: 0 2px;
+  color: #7a5f82;
+  background-color: transparent;
+  border: 1px solid #7a5f82;
+  text-align: center;
+}
+
+.social a:hover {
+  color: #fff;
+  background-color: #7a5f82;
+}
+
+.social a span {
+  display: inline-block;
+  font-size: 22px;
+  line-height: 50px;
+}

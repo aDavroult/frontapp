@@ -26,6 +26,10 @@ const Footer = () => {
         <li class="divider"> &nbsp;|&nbsp; </li><li>Tél : <span novaref="4259378" data-global="1" novatype="txt" novaint="1">+33 1 47 00 57 93</span></li>
         <li class="divider"> &nbsp;|&nbsp; </li><li><a href="/fr/contact.html" novaref="4259379" data-global="1" novatype="txt" novaint="1"> reservation@apphotel.com</a></li>
       </ul>
+      <ul class="social">
+        <li> <a href="https://www.facebook.com/GardetteParkHotel/" target="_blank"> <span class="icon-facebook">f</span> </a></li>
+        <li> <a href="https://www.instagram.com/gardetteparkhotel/" target="_blank"> <span class="icon-instagram">i</span> </a></li>
+      </ul>
       <ul class="footer-legal top">
         <li novaref="4259380" novatype="txt" data-global="1">appHotel</li><li class="divider">&nbsp;|&nbsp;</li>
         <li> <a href="/fr/disclaimer.html">Mentions légales</a></li><li class="divider">&nbsp;|&nbsp;</li>
