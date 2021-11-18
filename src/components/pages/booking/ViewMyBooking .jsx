@@ -61,8 +61,8 @@ const ViewMyBooking = () => {
                     })
                     .then(res => {
                         console.log(res.data)
-                    imageRooms.push(res.data.imageUrl)
-                    typeRooms.push(res.data.type)
+                        imageRooms.push(res.data.imageUrl)
+                        typeRooms.push(res.data.type)
                         setTypeRooms(typeRooms)
                         setImageRooms(imageRooms)
                         
