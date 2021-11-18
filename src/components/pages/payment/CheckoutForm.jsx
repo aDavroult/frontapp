@@ -74,7 +74,7 @@ export const CheckoutForm = ({data,finalPrice,setFinalPrice}) => {
                         }}
                     />
                     <Container className="mt-3 text-center">
-                        <button class="white btn btn-dark btn-block mt-2">Paiement</button>   
+                        <button class="white btn btn-dark btn-block mt-2">Payer</button>   
                     </Container>             
                 </form>
             </div>
