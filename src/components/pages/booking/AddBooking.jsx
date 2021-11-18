@@ -130,7 +130,7 @@ if((dateStart < endDate)){
 }
 
 else{
-    alert("Veuillez vérifier les dates")
+    alert("La date de début doit être supèrieur à la date de fin")
 }
 }
 
@@ -233,7 +233,6 @@ else{
                                     <Form.Label>Date de début</Form.Label>
                                     <Form.Control min={nowc} type="date" placeholder="Insérez la date de début - JJ-MM-AAAA" name="dateStart" value={dateStart} onChange={(e) => setDateStart(e.target.value)} required/>
                                 </Form.Group>
-
                                 <Form.Group as={Col} controlId="formGridPassword">
                                     <Form.Label>Date de fin</Form.Label>
                                     <Form.Control min={dateStart} type="date" placeholder="Insérez la date de fin - JJ-MM-AAAA" name="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)} required/>

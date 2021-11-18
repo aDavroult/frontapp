@@ -58,7 +58,7 @@ const MyBookings = () => {
             diff.hour = tmp % 24;                   
             tmp = Math.floor((tmp-diff.hour)/24);   
             diff.day = tmp;
-            if(diff.day > 1){
+            if(diff.day >= 1){
                 canDelete.push(true) 
                 setCanDelete(canDelete)
             }
