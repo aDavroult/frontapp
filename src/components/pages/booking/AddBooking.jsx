@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 import {Button, Col, Container, Form, Row, Carousel, Image} from "react-bootstrap";
 
+
 import axios from 'axios';
 import { Link,useHistory } from 'react-router-dom';
 import ReactDOM from "react-dom";
@@ -254,12 +255,12 @@ else{
                             <Row className="mb-3">
                                 <Form.Group as={Col} controlId="formGridEmail">
                                     <Form.Label>Date de début</Form.Label>
-                                    <Form.Control type="date" placeholder="Insérez la date de début - JJ-MM-AAAA" name="dateStart" value={dateStart} onChange={(e) => setDateStart(e.target.value)}/>
+                                    <Form.Control type="text" placeholder="Insérez la date de début - JJ-MM-AAAA" name="dateStart" value={dateStart} onChange={(e) => setDateStart(e.target.value)}/>
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formGridPassword">
                                     <Form.Label>Date de fin</Form.Label>
-                                    <Form.Control type="date" placeholder="Insérez la date de fin - JJ-MM-AAAA" name="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)}/>
+                                    <Form.Control type="text" placeholder="Insérez la date de fin - JJ-MM-AAAA" name="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)}/>
                                 </Form.Group>
                             </Row>
                             <Row className="mb-3">
