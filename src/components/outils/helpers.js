@@ -9,7 +9,6 @@ export function verifietoken(){
     const token = localStorage.getItem('token');
     //decoded the token
     const decoded = jwt_decode(token);
-    console.log(decoded);
     //get the current date in timestamp
     const now = new Date().getTime();
     //get the current date in string
@@ -18,8 +17,6 @@ export function verifietoken(){
     const endTime = decoded.exp*1000; 
      //get the exipiration date in string
     const endTimem = new Date(endTime);
-    console.log(now);
-    console.log(endTime);
     
     if (endTime < now) {
         console.log("Token expired.");
@@ -35,7 +32,6 @@ export function getCurrentUser(){
     const token = localStorage.getItem('token');
     //decoded the token
     const decoded = jwt_decode(token);
-    // console.log(decoded.id);
     return decoded.id
 
 }
@@ -45,12 +41,10 @@ export function getRoles(){
     const token = localStorage.getItem('token');
     //decoded the token
     const decoded = jwt_decode(token);
-    console.log(decoded);
     return decoded.roles;
 }
 //edit image of the room
 export function editImageRoom(id,imageFile){
-        console.log(imageFile);
         const data = new FormData();
         data.append('imageFile', imageFile);
         axios({
@@ -81,7 +75,6 @@ export function getRoom(id,setNumber,setType,setPrice,setImageUrl){
         }
     })
     .then(res => {
-        console.log(res)
         setNumber(res.data.number)
         setType(res.data.type)
         setPrice(res.data.price)
@@ -212,7 +205,6 @@ export function getOption(id,setName,setPrice){
         }
     })
     .then(res => {
-        console.log(res)
         setName(res.data.name)
         setPrice(res.data.price)
         
@@ -234,7 +226,6 @@ export function getUser(id,setEmail,setRoles){
         }
     })
     .then(res => {
-        console.log(res)
         setEmail(res.data.email)
         setRoles(res.data.roles)        
     })
@@ -256,7 +247,6 @@ export function getUserData(id,setEmail,setFirstName,setLastName,setPhone){
         }
     })
     .then(res => {
-        console.log(res)
         setEmail(res.data.email)
         setFirstName(res.data.firstName)
         setLastName(res.data.lastName)
@@ -327,11 +317,9 @@ export function deleteUser(id){
         }
     })
     .then(res => {
-        console.log(res)
         alert("utilisateur est bien supprimé")
     })
     .catch(err =>{
-        console.log(err)
         alert("vous ne pouvez pas le supprimé car il a des réservations")
     })
 
@@ -348,7 +336,6 @@ export function getPriceOfSelectedRooms(id){
     })
     .then(res => {
         const selectedPrice = res.data.price;
-        console.log(selectedPrice);
         return selectedPrice;
     })
     .catch(err => {
@@ -376,6 +363,10 @@ export function addBooking(dateStart,endDate,totalPrice,rooms,options){
     .then((response) => {
         console.log(response);
     })
+    .catch(err=>{
+        console.log("not booking")
+    }
+    )
 }
 //delete booking
 
@@ -408,8 +399,6 @@ export function getUserForBooking(url, setFirstName, setLastName){
         }
     })
     .then(res => {
-        console.log(res.totalPrice)  
-
         setFirstName(res.data.totalPrice)    
         setLastName(res.data.lastName)       
     })
@@ -420,19 +409,6 @@ export function getUserForBooking(url, setFirstName, setLastName){
 
 return  {setFirstName,setLastName}
 }
-//add booking
-/* export function addBookingf(){ */
-/*      //add booking */
-/*  useEffect(()=>{ */
-/*     console.log("finish",prices);  */
-/*     if(totalPrice && prices.length==idsForBooking.length){ */
-/*         addBooking(dateStart,endDate,totalPrice,rooms[0],checkedValues) */
-/*         alert(`La réservation est bien rajoutée` ) */
-/*         history.push("/mes-reservations"); */
-/*     } */
-/* },[totalPrice]) */
-/* } */
-/*  */
 //payment
 export function payment(token,totalPrice){
     
@@ -446,6 +422,5 @@ export function payment(token,totalPrice){
     .catch(err =>{
         console.log(err)
     })
-
     return true
 }

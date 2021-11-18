@@ -3,9 +3,11 @@ import {payment,addBooking} from '../../outils/helpers'
 import {Container} from "react-bootstrap";
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import { Link,useHistory } from 'react-router-dom';
 
 
 export const CheckoutForm = ({data,finalPrice,setFinalPrice}) => {
+    const history = useHistory();
     const stripe = useStripe();
     const elements = useElements();
     const [pricesOption,setPricesOption] = useState([]);
@@ -42,7 +44,7 @@ export const CheckoutForm = ({data,finalPrice,setFinalPrice}) => {
     },(isDisplay))
     
     console.log("totalPriceOption",totalPriceOption) 
-    console.log("totalprice",totalPrice)   
+    console.log("totalprice",totalPrice)  
     setFinalPrice(totalPriceOption+totalPrice)
     console.log("finallll",finalPrice)
     const handleSubmit = async (event) => {
@@ -56,9 +58,11 @@ export const CheckoutForm = ({data,finalPrice,setFinalPrice}) => {
             payment(paymentMethod.id, finalPrice*100)
             addBooking(dateStart,endDate,finalPrice,roomsbooking,checkedValues)
             alert("Paiement réussi")
+            history.push("/mes-reservations");
         }
         else{
             alert("Le paiement à échoué, merci de réessayer.")
+            history.push("/reserver");   
         }
     }
         return (
