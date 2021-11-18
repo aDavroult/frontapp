@@ -15,10 +15,7 @@ const GridRoom = () => {
         axios({
             method: "get",
             url: "api/rooms",
-            headers: {  
-                'Authorization':'Bearer '+ localStorage.getItem("token")
-            }
-        })
+            })
         .then((response) => {
             console.log(response);
             const availableRooms = response.data;
@@ -35,13 +32,13 @@ return (
                     {roomsList.map((roomsList) => (
                         <Col md={3} className="mt-3 mb-5">
                             <Card >
-                                {roomsList.imageUrl &&(<Card.Img variant="top" src={"https://apphot.herokuapp.com/" + roomsList.imageUrl}  />)}
+                                {roomsList.imageUrl &&(<Card.Img variant="top" src={axios.defaults.baseURL + roomsList.imageUrl}  />)}
                                 <Card.Body>
                                     <Card.Title>Chambre n°{roomsList.number}</Card.Title>
                                     <Card.Text>
                                         {roomsList.type}
                                     </Card.Text>
-                                    <Link to={"/room-view/"+ roomsList.id} className="text-center white" variant="dark"><Button >Voir</Button></Link>
+                                    <Link to={"/room-gridview/"+ roomsList.id} className="text-center white" variant="dark"><Button >Voir</Button></Link>
                                 </Card.Body>
                             </Card>
                         </Col>

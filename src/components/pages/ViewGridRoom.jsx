@@ -2,12 +2,11 @@ import React, { useState, useEffect} from 'react';
 
 import {Button, Col, Container, Form, Image, Row} from "react-bootstrap";
 import axios from 'axios'; 
-import { verifietoken, getCurrentUser, getRoles } from '../../outils/helpers'
 import { useHistory, useParams, Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/fontawesome-free-solid';
 
-const ViewRoom = () => {
+const ViewGridRoom = () => {
 
     const params = useParams();
     
@@ -17,14 +16,11 @@ const ViewRoom = () => {
     const [type,setType] = useState();
     const [price,setPrice] = useState();
 
-    const [roles, setRoles] = useState(getRoles());
-    const [route, setRoute] = useState("/our-rooms");
 
     const history = useHistory();
     
-    console.log(route)
         useEffect(()=> {
-            if(verifietoken()){
+            
                 axios({
                     method: "get",
                     url: `api/rooms/${params.id}`,
@@ -37,23 +33,13 @@ const ViewRoom = () => {
                     setPrice(res.data.price)
                     setImageUrl(res.data.imageUrl)
 
-                    console.log(roles)
+                   
 
-                    if(roles[0] == "ROLE_ADMIN"){
-                        setRoute("/room-list");
-                    } else {
-                        setRoute("/our-rooms") ;
-                    }
                 })
                 .catch(err =>{
                     console.log(err)
                 })
-            }
-            else{
-                localStorage.clear()
-                alert("Votre session à expirée")
-                history.push("/login");
-            }
+        
         }, [params.id])
 
     return (
@@ -74,7 +60,7 @@ const ViewRoom = () => {
                             </Col>
                             <Col className="col-md-12 text-center">
                                 <Button variant="dark btn-block" type="submit">
-                                    <Link className="white" to={route}>Retour</Link>
+                                    <Link className="white" to="/our-rooms">Retour</Link>
                                 </Button>
                             </Col>
                         </Row>
@@ -85,4 +71,4 @@ const ViewRoom = () => {
     );
 };
 
-export default ViewRoom;
+export default ViewGridRoom;
