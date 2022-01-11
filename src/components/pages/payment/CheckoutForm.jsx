@@ -5,7 +5,6 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Link,useHistory } from 'react-router-dom';
 
-
 export const CheckoutForm = ({data,finalPrice,setFinalPrice}) => {
     const history = useHistory();
     const stripe = useStripe();
@@ -74,7 +73,7 @@ export const CheckoutForm = ({data,finalPrice,setFinalPrice}) => {
                         }}
                     />
                     <Container className="mt-3 text-center">
-                        <button class="white btn btn-dark btn-block mt-2">Paiement</button>   
+                        <button class="white btn btn-dark btn-block mt-2">Payer</button>   
                     </Container>             
                 </form>
             </div>

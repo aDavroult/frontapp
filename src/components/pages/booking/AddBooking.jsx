@@ -275,7 +275,7 @@ else{
                             <Carousel className="mt-3">
                                 {allImageurl.map(allImageurl =>(
                                     <Carousel.Item >
-                                        <Image src={axios.defaults.baseURL + allImageurl} hight="100%" alt="image room" className="d-block w-100 hero"></Image>
+                                        <Image src={axios.defaults.baseURL + allImageurl} height="300px" alt="image room" className="d-block w-100 hero"></Image>
                                     </Carousel.Item>
                                 )) }
                             </Carousel>

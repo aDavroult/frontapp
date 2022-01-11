@@ -30,7 +30,7 @@ const data = props.location.state
             <p className="text-center">Réservation du <span className="important"> {data.dateStart}</span> au <span className="important">{data.endDate} </span></p>
             <p className="text-center">Montant total : <span className="important"> {finalPrice} € </span></p> 
            
-            <h1 className="my-5 text-center blue">Payer</h1>
+            <h1 className="my-5 text-center blue">Paiement</h1>
             <Container className="col-8 my-3">
               <Elements stripe={stripeTestPromise}>
                 <CheckoutForm data={data} finalPrice={finalPrice} setFinalPrice={setFinalPrice} />
